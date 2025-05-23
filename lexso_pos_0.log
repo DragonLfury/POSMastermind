@@ -118,3 +118,299 @@ May 23, 2025 6:25:52 PM com.lexso.login.main.Main$7 run
 INFO: Auto-login successful for remembered user: GeekHirusha
 May 23, 2025 6:25:53 PM com.lexso.dashboard.main.DashboardWindow <init>
 INFO: Initializing DashboardWindow.
+May 23, 2025 11:33:22 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: GeekHirusha
+May 23, 2025 11:33:22 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 23, 2025 11:33:22 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Dashboard default content loaded
+May 23, 2025 11:33:27 PM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 23, 2025 11:33:27 PM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 23, 2025 11:33:27 PM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 23, 2025 11:33:27 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 23, 2025 11:58:48 PM com.lexso.login.main.Main$7 run
+WARNING: Remembered user credentials invalid or not found. Clearing preference.
+May 23, 2025 11:58:48 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 11:58:54 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 23, 2025 11:58:55 PM com.lexso.login.main.Main jButton1ActionPerformed
+WARNING: Login failed for user: Admin. Invalid credentials.
+May 23, 2025 11:59:12 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 23, 2025 11:59:12 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: admin@lexso.com)
+May 23, 2025 11:59:12 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: Admin
+May 23, 2025 11:59:12 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 23, 2025 11:59:12 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Dashboard default content loaded
+May 23, 2025 11:59:12 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 23, 2025 11:59:17 PM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 23, 2025 11:59:18 PM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 23, 2025 11:59:18 PM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 23, 2025 11:59:18 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:01:30 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:01:31 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:01:31 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Dashboard default content loaded
+May 24, 2025 12:01:33 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:01:33 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:01:33 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:01:33 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:01:37 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:01:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:01:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:01:37 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:01:37 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:01:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:01:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:01:37 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:01:38 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:01:38 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:01:38 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:01:38 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:01:38 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:01:38 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:01:38 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:01:38 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:04:29 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:04:29 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:04:29 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Dashboard default content loaded
+May 24, 2025 12:04:32 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:04:32 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:04:32 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:04:32 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:04:32 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:04:32 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:04:32 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:04:32 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:13:42 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:13:42 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:13:44 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:13:44 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:13:44 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:13:44 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:13:47 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:13:47 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:13:47 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:13:47 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:14:22 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:14:23 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:14:27 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:14:27 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:14:27 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:14:27 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:14:29 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:14:29 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:14:29 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:14:29 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:15:18 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:15:18 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:15:20 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:15:20 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:15:20 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:15:20 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:15:21 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:15:21 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:15:21 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:15:21 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:18:18 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:18:18 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:18:20 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:18:20 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:18:20 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:18:20 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:21:01 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:21:01 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:21:05 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:21:05 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:21:05 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:21:05 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:34:08 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:34:08 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:34:11 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:34:11 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:34:11 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:34:15 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:34:15 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:34:15 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:34:22 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:34:22 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:34:22 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:35:19 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:35:19 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:35:26 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:35:26 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:35:26 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:35:26 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:35:51 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:35:52 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:36:08 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:36:08 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:36:13 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:36:13 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:36:13 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:36:13 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:40:14 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:40:14 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:40:17 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:40:17 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:40:17 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:40:17 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:41:23 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:41:23 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:41:25 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:41:25 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:41:25 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:41:25 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 12:43:35 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 12:43:35 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 12:43:37 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 12:43:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 12:43:37 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 12:43:37 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 1:08:07 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 1:08:07 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 24, 2025 1:08:10 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 24, 2025 1:08:10 AM com.lexso.employee.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 24, 2025 1:08:10 AM com.lexso.employee.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 24, 2025 1:08:10 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 24, 2025 1:08:17 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 24, 2025 1:08:17 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
