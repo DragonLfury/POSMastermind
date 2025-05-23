@@ -1,0 +1,116 @@
+May 22, 2025 1:29:34 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 22, 2025 11:38:03 AM com.lexso.login.main.Main$7 run
+WARNING: Remembered user credentials invalid or not found. Clearing preference.
+May 22, 2025 11:38:04 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 22, 2025 11:38:30 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 22, 2025 11:38:30 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: admin@lexso.com)
+May 22, 2025 11:38:30 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me unchecked. Preference cleared.
+May 22, 2025 11:38:30 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 22, 2025 11:38:35 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 22, 2025 11:38:43 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Username
+May 22, 2025 11:38:45 AM com.lexso.login.main.Main jButton1ActionPerformed
+WARNING: Login failed: Username field is empty or still default.
+May 22, 2025 11:41:58 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 22, 2025 11:42:08 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: admin
+May 22, 2025 11:42:09 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: admin (Email: admin@lexso.com)
+May 22, 2025 11:42:09 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me unchecked. Preference cleared.
+May 22, 2025 11:42:09 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 22, 2025 11:42:13 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 22, 2025 11:42:18 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 22, 2025 11:42:19 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: admin@lexso.com)
+May 22, 2025 11:42:19 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: Admin
+May 22, 2025 11:42:19 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 22, 2025 11:42:23 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 22, 2025 11:42:42 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 22, 2025 11:42:57 AM com.lexso.login.main.Main$7 run
+WARNING: Remembered user credentials invalid or not found. Clearing preference.
+May 22, 2025 11:42:57 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 22, 2025 11:43:05 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 22, 2025 11:43:09 AM com.lexso.login.main.Main jButton1ActionPerformed
+WARNING: Login failed for user: Admin. Invalid credentials.
+May 23, 2025 1:08:33 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 1:09:41 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 2:08:34 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 2:08:51 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: GeekHirusha
+May 23, 2025 2:08:51 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: GeekHirusha (Email: geekhirusha@gmail.com)
+May 23, 2025 2:08:51 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: GeekHirusha
+May 23, 2025 2:08:52 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 23, 2025 2:10:18 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: GeekHirusha
+May 23, 2025 2:10:22 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 2:10:24 AM com.lexso.login.main.ForgotPassword <init>
+INFO: Starting LexSo POS application Password Reset.
+May 23, 2025 2:10:38 AM com.lexso.login.main.ForgotPassword sendOtpEmail
+INFO: OTP email sent to: geekhirusha@gmail.com
+May 23, 2025 2:10:40 AM com.lexso.login.main.ForgotPassword sendOtpWhatsApp
+INFO: OTP WhatsApp message sent to: 94726733332
+May 23, 2025 2:10:40 AM com.lexso.login.main.ForgotPassword generateAndSendOTP
+INFO: OTP generated and sent for email: geekhirusha@gmail.com
+May 23, 2025 2:10:59 AM com.lexso.login.main.ForgotPassword verifyOTP
+WARNING: Invalid OTP attempt for email: geekhirusha@gmail.com
+May 23, 2025 2:11:08 AM com.lexso.login.main.ForgotPassword verifyOTP
+INFO: OTP verified successfully for email: geekhirusha@gmail.com
+May 23, 2025 2:11:25 AM com.lexso.login.main.ForgotPassword resetPassword
+INFO: Password reset successfully for email: geekhirusha@gmail.com
+May 23, 2025 2:11:32 AM com.lexso.login.main.ForgotPassword sendPasswordResetConfirmation
+INFO: Password reset confirmation sent to: geekhirusha@gmail.com
+May 23, 2025 2:11:32 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 2:11:42 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+May 23, 2025 2:11:42 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: admin@lexso.com)
+May 23, 2025 2:11:42 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me unchecked. Preference cleared.
+May 23, 2025 2:11:42 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+May 23, 2025 2:34:41 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 2:35:46 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 9:39:54 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 9:41:03 AM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+May 23, 2025 9:41:14 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: GeekHirusha
+May 23, 2025 9:41:15 AM com.lexso.login.main.Main jButton1ActionPerformed
+WARNING: Login failed for user: GeekHirusha. Invalid credentials.
+May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: GeekHirusha
+May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: GeekHirusha (Email: geekhirusha@gmail.com)
+May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: GeekHirusha
+May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
