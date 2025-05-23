@@ -114,3 +114,7 @@ May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
 INFO: Remember Me checked. Preference saved for user: GeekHirusha
 May 23, 2025 9:41:18 AM com.lexso.login.main.Main jButton1ActionPerformed
 INFO: Redirected to Dashboard. Login window disposed.
+May 23, 2025 6:25:52 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: GeekHirusha
+May 23, 2025 6:25:53 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.

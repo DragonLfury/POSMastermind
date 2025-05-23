@@ -1,38 +1,23 @@
 package com.lexso.dashboard.main;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
 import java.util.TimeZone;
-import java.util.Vector;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.login.main.Main;
+import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.util.CurrentUser;
 import java.util.prefs.Preferences;
 
@@ -65,6 +50,7 @@ public class DashboardWindow extends javax.swing.JFrame {
      * Creates new form DashboardWindow
      */
     public DashboardWindow() {
+        LOGGER.info("Initializing DashboardWindow.");
         initComponents();
         defaultColor = jPanel1.getBackground();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -94,7 +80,7 @@ public class DashboardWindow extends javax.swing.JFrame {
 
     private void updateCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Colombo")); // Set to Sri Lanka Time Zone
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Colombo"));
         String currentTime = sdf.format(new Date());
 
         // Update the label with the current time

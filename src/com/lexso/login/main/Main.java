@@ -33,7 +33,7 @@ import javax.swing.JPanel;
  */
 public class Main extends javax.swing.JFrame {
 
-    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static final Preferences PREFS = Preferences.userNodeForPackage(Main.class);
     private static final String REMEMBER_ME_KEY = "rememberMe";
     private static final String USERNAME_KEY = "rememberedUsername";

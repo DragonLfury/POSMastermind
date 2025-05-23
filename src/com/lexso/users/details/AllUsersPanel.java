@@ -1,10 +1,12 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.lexso.users.details;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.lexso.connection.DatabaseConnection;
+import com.lexso.dashboard.main.DashboardWindow;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,17 +33,24 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import com.lexso.connection.DatabaseConnection;
-import javax.swing.JFrame;
 
 /**
  *
  * @author User
  */
-public class AllUsersWindow extends javax.swing.JFrame {
+public class AllUsersPanel extends javax.swing.JPanel {
 
-    public AllUsersWindow() {
+    private JFrame parentFrame;
+
+    /**
+     * Creates new form AllUsersPanel
+     */
+    public AllUsersPanel() {
         initComponents();
+        
+        DashboardWindow dashboardWindow = new DashboardWindow();
+        this.parentFrame = dashboardWindow;
+        
         int newRowHeight = 35;
         jTable1.setRowHeight(newRowHeight);
         searchTextField.setForeground(new java.awt.Color(150, 150, 150));
@@ -293,6 +303,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -305,10 +316,10 @@ public class AllUsersWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jButton1.setText("Update");
@@ -478,12 +489,8 @@ public class AllUsersWindow extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -502,32 +509,39 @@ public class AllUsersWindow extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         userUpdate();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         userInactive();
-
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        showUserDetails();
-
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         addUserProcess();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            showUserDetails();
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        if (evt.getKeyCode() == evt.VK_DELETE) {
+            userInactive();
+        } else if (evt.getKeyCode() == evt.VK_ENTER) {
+            showUserDetails();
+        } else if (evt.getKeyCode() == evt.VK_F2) {
+            userUpdate();
+        } else if (evt.getKeyCode() == evt.VK_SLASH) {
+            searchTextField.grabFocus();
+        }
+    }//GEN-LAST:event_jTable1KeyPressed
 
     private void searchTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFieldFocusGained
 
@@ -550,23 +564,10 @@ public class AllUsersWindow extends javax.swing.JFrame {
         loadUserData(search, "");
     }//GEN-LAST:event_searchTextFieldKeyReleased
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if (evt.getClickCount() == 2) {
-            showUserDetails();
-        }
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-        if (evt.getKeyCode() == evt.VK_DELETE) {
-            userInactive();
-        } else if (evt.getKeyCode() == evt.VK_ENTER) {
-            showUserDetails();
-        } else if (evt.getKeyCode() == evt.VK_F2) {
-            userUpdate();
-        } else if (evt.getKeyCode() == evt.VK_SLASH) {
-            searchTextField.grabFocus();
-        }
-    }//GEN-LAST:event_jTable1KeyPressed
+        showUserDetails();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
@@ -596,7 +597,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
                     String signaturePath = resultSet.getString("signature");
 
                     AddOrUpdateUsers addOrUpdateUsers = new AddOrUpdateUsers(
-                            this,
+                            parentFrame,
                             true,
                             "view",
                             profilePicPath,
@@ -693,7 +694,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
                     String signaturePath = resultSet.getString("signature");
 
                     AddOrUpdateUsers addOrUpdateUsers = new AddOrUpdateUsers(
-                            this,
+                            parentFrame,
                             true,
                             "update",
                             profilePicPath,
@@ -745,7 +746,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
         String signaturePath = null;
 
         AddOrUpdateUsers addOrUpdateUsers = new AddOrUpdateUsers(
-                this,
+                parentFrame,
                 true,
                 "add",
                 profilePicPath,
@@ -768,6 +769,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
             searchTextField.grabFocus();
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
