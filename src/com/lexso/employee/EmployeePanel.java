@@ -9,9 +9,6 @@ import com.lexso.dashboard.main.DashboardWindow;
 import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.users.details.AddOrUpdateUsers;
 import com.lexso.users.details.AllUsersWindow;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JLabel;
 
 /**
  *
@@ -75,7 +72,6 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         employeeListjLable.setBackground(new java.awt.Color(59, 130, 246));
         employeeListjLable.setToolTipText("");
-        employeeListjLable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         employeeListjLable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 employeeListjLableMouseClicked(evt);
@@ -118,7 +114,6 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         attendancejPanel.setBackground(new java.awt.Color(168, 85, 247));
         attendancejPanel.setToolTipText("");
-        attendancejPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         attendancejPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 attendancejPanelMouseClicked(evt);
@@ -161,7 +156,6 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         newEmployeejPanel.setBackground(new java.awt.Color(34, 197, 94));
         newEmployeejPanel.setToolTipText("");
-        newEmployeejPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         newEmployeejPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newEmployeejPanelMouseClicked(evt);
@@ -204,7 +198,6 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         shiftManagementjPanel.setBackground(new java.awt.Color(249, 115, 22));
         shiftManagementjPanel.setToolTipText("");
-        shiftManagementjPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         shiftManagementjPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 shiftManagementjPanelMouseClicked(evt);
@@ -296,7 +289,7 @@ public class EmployeePanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(newEmployeejPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,7 +299,7 @@ public class EmployeePanel extends javax.swing.JPanel {
                         .addComponent(employeeListjLable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(attendancejPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
