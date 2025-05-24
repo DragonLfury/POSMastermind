@@ -7,6 +7,7 @@ package com.lexso.employee;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.dashboard.main.DashboardWindow;
 import static com.lexso.login.main.Main.LOGGER;
+import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.users.details.AddOrUpdateUsers;
 import com.lexso.users.details.AllUsersWindow;
 
@@ -32,7 +33,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel5.setIcon(listIcon);
         FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/employee/icon/attendance.svg", jLabel6.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel6.setIcon(attendanceIcon);
-        FlatSVGIcon newIcon = new FlatSVGIcon("com/lexso/employee/icon/addemployee.svg", jLabel7.getWidth() - 90, jLabel5.getHeight() - 20);
+        FlatSVGIcon newIcon = new FlatSVGIcon("com/lexso/employee/icon/banklist.svg", jLabel7.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel7.setIcon(newIcon);
         FlatSVGIcon shiftIcon = new FlatSVGIcon("com/lexso/employee/icon/shiftmanage.svg", jLabel8.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel8.setIcon(shiftIcon);
@@ -72,6 +73,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         employeeListjLable.setBackground(new java.awt.Color(59, 130, 246));
         employeeListjLable.setToolTipText("");
+        employeeListjLable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         employeeListjLable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 employeeListjLableMouseClicked(evt);
@@ -82,12 +84,14 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Employee List");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("View and manage all staff members");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout employeeListjLableLayout = new javax.swing.GroupLayout(employeeListjLable);
         employeeListjLable.setLayout(employeeListjLableLayout);
@@ -114,6 +118,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         attendancejPanel.setBackground(new java.awt.Color(168, 85, 247));
         attendancejPanel.setToolTipText("");
+        attendancejPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         attendancejPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 attendancejPanelMouseClicked(evt);
@@ -130,6 +135,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel12.setText("Track daily employee attendance");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout attendancejPanelLayout = new javax.swing.GroupLayout(attendancejPanel);
         attendancejPanel.setLayout(attendancejPanelLayout);
@@ -156,6 +162,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         newEmployeejPanel.setBackground(new java.awt.Color(34, 197, 94));
         newEmployeejPanel.setToolTipText("");
+        newEmployeejPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         newEmployeejPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newEmployeejPanelMouseClicked(evt);
@@ -165,13 +172,15 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Add New Employee");
+        jLabel13.setText("Employee Bank List");
 
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Create new staff profiles");
+        jLabel14.setText("View and manage all members Bank AC");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout newEmployeejPanelLayout = new javax.swing.GroupLayout(newEmployeejPanel);
         newEmployeejPanel.setLayout(newEmployeejPanelLayout);
@@ -198,6 +207,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         shiftManagementjPanel.setBackground(new java.awt.Color(249, 115, 22));
         shiftManagementjPanel.setToolTipText("");
+        shiftManagementjPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         shiftManagementjPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 shiftManagementjPanelMouseClicked(evt);
@@ -208,12 +218,15 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Shift Management");
+        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Schedule and manage work shifts");
+        jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout shiftManagementjPanelLayout = new javax.swing.GroupLayout(shiftManagementjPanel);
         shiftManagementjPanel.setLayout(shiftManagementjPanelLayout);
@@ -274,15 +287,15 @@ public class EmployeePanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addContainerGap(167, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(employeeListjLable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(attendancejPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newEmployeejPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(shiftManagementjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -299,7 +312,7 @@ public class EmployeePanel extends javax.swing.JPanel {
                         .addComponent(employeeListjLable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(attendancejPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -311,9 +324,8 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_employeeListjLableMouseClicked
 
     private void newEmployeejPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newEmployeejPanelMouseClicked
-        DashboardWindow dashboardWindow = new DashboardWindow();
-        AddOrUpdateUsers addOrUpdateUsers = new AddOrUpdateUsers(dashboardWindow, true, "add", null, null);
-        addOrUpdateUsers.setVisible(true);
+        AllBankAccountsWindow allBankAccountsWindow = new AllBankAccountsWindow();
+        allBankAccountsWindow.setVisible(true);
     }//GEN-LAST:event_newEmployeejPanelMouseClicked
 
     private void attendancejPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendancejPanelMouseClicked

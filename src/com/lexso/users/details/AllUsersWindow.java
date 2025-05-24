@@ -409,7 +409,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 153, 255));
         jLabel2.setText("All Users");
 
-        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("View and manage all users registered in the system");
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N

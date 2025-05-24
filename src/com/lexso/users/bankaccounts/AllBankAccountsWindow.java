@@ -52,16 +52,16 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
         jButton4.setBorderPainted(false);
 
 // Set icons
-        FlatSVGIcon viewIcon = new FlatSVGIcon("icon/view.svg", jButton3.getWidth() - 90, jButton3.getHeight() - 20);
+        FlatSVGIcon viewIcon = new FlatSVGIcon("com/lexso/users/icon/view.svg", jButton3.getWidth() - 90, jButton3.getHeight() - 20);
         jButton3.setIcon(viewIcon);
 
-        FlatSVGIcon addIcon = new FlatSVGIcon("icon/add.svg", jButton4.getWidth() - 90, jButton4.getHeight() - 20);
+        FlatSVGIcon addIcon = new FlatSVGIcon("com/lexso/users/icon/add.svg", jButton4.getWidth() - 90, jButton4.getHeight() - 20);
         jButton4.setIcon(addIcon);
 
-        FlatSVGIcon updateIcon = new FlatSVGIcon("icon/update.svg", jButton1.getWidth() - 90, jButton1.getHeight() - 20);
+        FlatSVGIcon updateIcon = new FlatSVGIcon("com/lexso/users/icon/update.svg", jButton1.getWidth() - 90, jButton1.getHeight() - 20);
         jButton1.setIcon(updateIcon);
 
-        FlatSVGIcon deleteIcon = new FlatSVGIcon("icon/delete.svg", jButton2.getWidth() - 90, jButton2.getHeight() - 20);
+        FlatSVGIcon deleteIcon = new FlatSVGIcon("com/lexso/users/icon/delete.svg", jButton2.getWidth() - 90, jButton2.getHeight() - 20);
         jButton2.setIcon(deleteIcon);
 
     }
@@ -71,7 +71,7 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
         try {
 
             ResultSet resultSet = DatabaseConnection.executeSearch("SELECT "
-                    + "bd.employee_email AS email, "
+                    + "bd.user_email AS email, "
                     + "bd.name, "
                     + "bd.acnumber AS account_number, "
                     + "b.bank_name AS bank, "
@@ -79,7 +79,7 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
                     + "bd.description "
                     + "FROM `bank_details` bd "
                     + "INNER JOIN `bank` b ON `bd`.`bank_id` = `b`.`id` "
-                    + "WHERE bd.employee_email LIKE '%" + search + "%' "
+                    + "WHERE bd.user_email LIKE '%" + search + "%' "
                     + "OR bd.name LIKE '%" + search + "%' "
                     + "OR bd.acnumber LIKE '%" + search + "%' "
                     + "OR b.bank_name LIKE '%" + search + "%' "
@@ -235,10 +235,10 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
         jLabel2.setText("All Bank Accounts");
 
-        jLabel3.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Manage and view all bank accounts in one place");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -326,10 +326,10 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
 
         if (selectedRow != -1) {
 
-            String employeeEmail = jTable1.getValueAt(selectedRow, 0).toString();
+            String userEmail = jTable1.getValueAt(selectedRow, 0).toString();
 
             int confirmation = JOptionPane.showConfirmDialog(this,
-                    "This action will permanently delete the bank details for " + employeeEmail + ". Do you wish to proceed?",
+                    "This action will permanently delete the bank details for " + userEmail + ". Do you wish to proceed?",
                     "Confirm Deletion",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
@@ -337,7 +337,7 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
             if (confirmation == JOptionPane.YES_OPTION) {
                 try {
 
-                    DatabaseConnection.executeIUD("DELETE FROM `bank_details` WHERE `employee_email` = '" + employeeEmail + "'");
+                    DatabaseConnection.executeIUD("DELETE FROM `bank_details` WHERE `user_email` = '" + userEmail + "'");
 
                     JOptionPane.showMessageDialog(this, "Bank details deleted successfully.");
                     loadBankData("");

@@ -116,7 +116,7 @@ public class AddOrUpdateBankAC extends javax.swing.JDialog {
 
         try {
 
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `employee`");
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `user`");
 
             Vector vector = new Vector();
 
@@ -354,7 +354,7 @@ public class AddOrUpdateBankAC extends javax.swing.JDialog {
         try {
             ResultSet bankresultSet = DatabaseConnection.executeSearch("SELECT * FROM `bank_details` "
                     + "INNER JOIN `bank` ON `bank_details`.`bank_id` = `bank`.`id` "
-                    + "WHERE `bank_details`.`employee_email` = '" + emailComboBox.getSelectedItem() + "'");
+                    + "WHERE `bank_details`.`user_email` = '" + emailComboBox.getSelectedItem() + "'");
 
             String name = jTextField1.getText();
             String acnumber = jTextField2.getText();
@@ -369,7 +369,7 @@ public class AddOrUpdateBankAC extends javax.swing.JDialog {
             }
 
             if (!bankresultSet.next()) {
-                DatabaseConnection.executeIUD("INSERT INTO `bank_details`(`name`, `acnumber`, `branch`, `description`, `bank_id`, `employee_email`) VALUES ('" + name + "', '" + acnumber + "', '" + branch + "', '" + description + "', " + bankMap.get(bank_name) + ", '" + emailComboBox.getSelectedItem() + "')");
+                DatabaseConnection.executeIUD("INSERT INTO `bank_details`(`name`, `acnumber`, `branch`, `description`, `bank_id`, `user_email`) VALUES ('" + name + "', '" + acnumber + "', '" + branch + "', '" + description + "', " + bankMap.get(bank_name) + ", '" + emailComboBox.getSelectedItem() + "')");
                 JOptionPane.showMessageDialog(this, "Bank details added successfully.");
             } else {
 
@@ -379,7 +379,7 @@ public class AddOrUpdateBankAC extends javax.swing.JDialog {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
-                    DatabaseConnection.executeIUD("UPDATE `bank_details` SET `name` = '" + name + "', `acnumber` = '" + acnumber + "', `branch` = '" + branch + "', `description` = '" + description + "', `bank_id` = " + bankMap.get(bank_name) + " WHERE `employee_email` = '" + emailComboBox.getSelectedItem() + "'");
+                    DatabaseConnection.executeIUD("UPDATE `bank_details` SET `name` = '" + name + "', `acnumber` = '" + acnumber + "', `branch` = '" + branch + "', `description` = '" + description + "', `bank_id` = " + bankMap.get(bank_name) + " WHERE `user_email` = '" + emailComboBox.getSelectedItem() + "'");
                     JOptionPane.showMessageDialog(this, "Bank details updated successfully.");
                 } else {
                     JOptionPane.showMessageDialog(this, "Update canceled.");
@@ -399,8 +399,8 @@ public class AddOrUpdateBankAC extends javax.swing.JDialog {
 
             ResultSet bankresultSet = DatabaseConnection.executeSearch("SELECT * FROM `bank_details` "
                     + "INNER JOIN `bank` ON `bank_details`.`bank_id` = `bank`.`id` "
-                    + "WHERE `bank_details`.`employee_email` = '" + emailComboBox.getSelectedItem() + "'");
-
+                    + "WHERE `bank_details`.`user_email` = '" + emailComboBox.getSelectedItem() + "'");
+            
             if (bankresultSet.next()) {
                 if (recent.equals("view")) {
                     jTextField1.setText(bankresultSet.getString("name"));
