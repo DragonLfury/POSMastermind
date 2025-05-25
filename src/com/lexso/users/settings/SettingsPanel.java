@@ -6,9 +6,9 @@ package com.lexso.users.settings;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.connection.DatabaseConnection;
+import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.util.CurrentUser;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +23,10 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.Vector;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -43,7 +41,6 @@ public class SettingsPanel extends javax.swing.JPanel {
     private static HashMap<String, String> provinceMap = new HashMap<>();
     private static HashMap<String, String> districtMap = new HashMap<>();
     private static HashMap<String, String> cityMap = new HashMap<>();
-    private static HashMap<String, String> themeMap = new HashMap<>();
     private static HashMap<String, String> bankMap = new HashMap<>();
 
     public static Color hoverColor = Color.decode("#90EE90");
@@ -53,7 +50,6 @@ public class SettingsPanel extends javax.swing.JPanel {
     private String loggedInRole = CurrentUser.getRole();
     private String loggedInProfilePic = CurrentUser.getProfilePic();
 
-
     private JFileChooser fileChooser;
     private File selectedFile;
 
@@ -61,16 +57,16 @@ public class SettingsPanel extends javax.swing.JPanel {
      * Creates new form NewJPanel
      */
     public SettingsPanel() {
-        initComponents();
-        loadNameAndEmail(email, fName, lName);
+        initComponents(); // Line 62
         loadSVGIcons();
 
         loadCountry();
+        loadProfilePic(loggedInEmail);
+        loadGender();
         loadBank();
-        loadProvice(countryMap.get(String.valueOf(countryComboBox.getSelectedItem())));
-        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox.getSelectedItem())));
-        loadCity(districtMap.get(String.valueOf(districtComboBox.getSelectedItem())));
-        loginTimeLabel.setText(dateTime);
+        loadProvice(countryMap.get(String.valueOf(countryComboBox1.getSelectedItem()))); // Line 68 - Another potential NullPointerException here if countryComboBox is null
+        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox1.getSelectedItem())));
+        loadCity(districtMap.get(String.valueOf(districtComboBox1.getSelectedItem())));
 
         loadDetails();
         loadBankCountry(bankMap.get(String.valueOf(bankComboBox.getSelectedItem())));
@@ -78,65 +74,30 @@ public class SettingsPanel extends javax.swing.JPanel {
         // Gether User Type
         try {
 
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `employee` WHERE `email` = '" + email + "'");
-
-            if (resultSet.next() | email == "admin@geekhirusha.com") {
-
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `user` WHERE `email` = '" + loggedInEmail + "'");
+            if (resultSet.next()) {
                 if (resultSet.getString("role_id").equals("1")) {
-                    jPanel7.setVisible(true);
                     jPanel20.setVisible(true);
                     adminProPanel.setVisible(true);
-                } else if (resultSet.getString("role_id").equals("2")) {
-                    jPanel7.setVisible(false);
+                } else {
                     jPanel20.setVisible(false);
                     adminProPanel.setVisible(false);
                 }
-
             } else {
-                this.dispose();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        startTimer();
-    }
-
-    private void startTimer() {
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateCurrentTime();
-                updateCurrentDate();
-            }
-        });
-        timer.start(); // Start the timer
-    }
-
-    private void updateCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Colombo")); // Set to Sri Lanka Time Zone
-        String currentTime = sdf.format(new Date());
-
-        // Update the label with the current time
-        jLabel45.setText(currentTime);
-    }
-
-    private void updateCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd"); // Format for the date
-        String currentDate = sdf.format(new Date());
-
-        // Update jLabel46 with the current date
-        jLabel46.setText(currentDate);
     }
 
     private void loadCountry() {
-
         try {
             ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `country`");
 
             Vector vector = new Vector();
+            vector.add("Select Country");
 
             while (resultSet.next()) {
                 vector.add(resultSet.getString("country_name"));
@@ -144,12 +105,25 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
 
             DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-            countryComboBox.setModel(model);
+            countryComboBox1.setModel(model); // Use countryComboBox1 instead of countryComboBox
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void loadGender() {
+        try {
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `gender`");
+            Vector<String> vector = new Vector<>();
+            while (resultSet.next()) {
+                vector.add(resultSet.getString("name"));
+            }
+            DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
+            jComboBox2.setModel(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadProvice(String id) {
@@ -165,7 +139,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
 
             DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-            provinceComboBox.setModel(model);
+            provinceComboBox1.setModel(model);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,7 +161,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
 
             DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-            districtComboBox.setModel(model);
+            districtComboBox1.setModel(model);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,7 +182,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
 
             DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
-            cityComboBox.setModel(model);
+            cityComboBox1.setModel(model);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,163 +191,76 @@ public class SettingsPanel extends javax.swing.JPanel {
     }
 
     private void loadProfilePic(String userEmail) {
-
         try {
-
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `employee` WHERE `email` = '" + userEmail + "'");
-
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `user` WHERE `email` = '" + userEmail + "'");
             if (resultSet.next()) {
-
+                ImageIcon profileIcon;
+                ImageIcon signatureIcon;
                 if (resultSet.getString("profile_picture").contains(".")) {
-                    // Load the image from the path
-                    ImageIcon profileIcon = new ImageIcon(resultSet.getString("profile_picture"));
-                    ImageIcon signatureIcon;
-
-                    if (resultSet.getString("signature").equals("no")) {
-                        signatureIcon = new ImageIcon(getClass().getResource("/icon/nullsignature.png"));
-                    } else {
-                        signatureIcon = new ImageIcon(resultSet.getString("signature"));
-                    }
-
-                    // Resize the image to 128x128
-                    Image img = profileIcon.getImage();
-                    Image signatureimg = signatureIcon.getImage();
-
-                    Image resizedImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                    Image resizedSignatureImg = signatureimg.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
-                    ImageIcon resizedIcon = new ImageIcon(resizedImg);
-                    ImageIcon resizedSignatuureIcon = new ImageIcon(resizedSignatureImg);
-
-                    // Set the resized icon to the JLabel
-                    jLabel1.setIcon(resizedIcon);
-                    jLabel41.setIcon(resizedSignatuureIcon);
-
-                    // Optionally, make the label rounded
-                    jLabel1.setBorder(BorderFactory.createEmptyBorder()); // No default border
-
-                    jLabel1.setOpaque(true); // Ensures background is painted
-                    jLabel1.setPreferredSize(new Dimension(100, 100)); // Set label size to match image
-                    jLabel1.setMaximumSize(new Dimension(100, 100));
-
+                    profileIcon = new ImageIcon(getClass().getResource(resultSet.getString("profile_picture")));
                 } else {
-                    // Load the image from the path
-                    ImageIcon profileIcon = new ImageIcon(getClass().getResource("/icon/man.png"));
-
-                    // Resize the image to 128x128
-                    ImageIcon signatureIcon;
-
-                    if (resultSet.getString("signature").equals("no")) {
-                        signatureIcon = new ImageIcon(getClass().getResource("/icon/nullsignature.png"));
-                    } else {
-                        signatureIcon = new ImageIcon(resultSet.getString("signature"));
-                    }
-
-                    // Resize the image to 128x128
-                    Image img = profileIcon.getImage();
-                    Image signatureimg = signatureIcon.getImage();
-
-                    Image resizedImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                    Image resizedSignatureImg = signatureimg.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
-                    ImageIcon resizedIcon = new ImageIcon(resizedImg);
-                    ImageIcon resizedSignatuureIcon = new ImageIcon(resizedSignatureImg);
-
-                    // Set the resized icon to the JLabel
-                    jLabel1.setIcon(resizedIcon);
-                    jLabel41.setIcon(resizedSignatuureIcon);
-
-                    // Optionally, make the label rounded
-                    jLabel1.setBorder(BorderFactory.createEmptyBorder()); // No default border
-
-                    jLabel1.setOpaque(true); // Ensures background is painted
-                    jLabel1.setPreferredSize(new Dimension(100, 100)); // Set label size to match image
-                    jLabel1.setMaximumSize(new Dimension(100, 100));
+                    profileIcon = new ImageIcon(getClass().getResource("/com/lexso/users/profilepics/man.png"));
                 }
+                if (resultSet.getString("signature").contains(".")) {
+                    signatureIcon = new ImageIcon(getClass().getResource(resultSet.getString("signature")));
+                } else {
+                    signatureIcon = new ImageIcon(getClass().getResource("/com/lexso/users/signatures/nullsignature.png"));
+                }
+                Image profileImg = profileIcon.getImage();
+                Image signatureImg = signatureIcon.getImage();
+                Image resizedProfileImg = profileImg.getScaledInstance(140, 140, Image.SCALE_SMOOTH);
+                Image resizedSignatureImg = signatureImg.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                ImageIcon resizedProfileIcon = new ImageIcon(resizedProfileImg);
+                ImageIcon resizedSignatureIcon = new ImageIcon(resizedSignatureImg);
+                jLabel49.setIcon(resizedProfileIcon);
+                jLabel54.setIcon(resizedSignatureIcon);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void loadSVGIcons() {
-        
-        FlatSVGIcon profileImage = new FlatSVGIcon("icon/profile.svg", jButton3.getWidth() - 128, jButton3.getHeight() - 23);
-        jButton3.setIcon(profileImage);
 
-        FlatSVGIcon signImage = new FlatSVGIcon("icon/sign.svg", jButton7.getWidth() - 125, jButton7.getHeight() - 20);
-        jButton7.setIcon(signImage);
+        FlatSVGIcon profileImage = new FlatSVGIcon("com/lexso/users/icon/profile.svg", 20, 20);
+        jButton4.setIcon(profileImage);
 
-        FlatSVGIcon removeImage = new FlatSVGIcon("icon/remove.svg", jButton4.getWidth() - 103, jButton4.getHeight() - 25);
-        jButton4.setIcon(removeImage);
-        jButton8.setIcon(removeImage);
+        FlatSVGIcon signImage = new FlatSVGIcon("com/lexso/users/icon/sign.svg", 25, 20);
+        jButton8.setIcon(signImage);
 
-        FlatSVGIcon bankImage = new FlatSVGIcon("icon/bank.svg", jLabel30.getWidth(), jLabel30.getHeight());
-        jLabel30.setIcon(bankImage);
+        FlatSVGIcon removeImage = new FlatSVGIcon("com/lexso/users/icon/remove.svg", 20, 20);
+        jButton5.setIcon(removeImage);
+        jButton9.setIcon(removeImage);
 
-        FlatSVGIcon empImage = new FlatSVGIcon("icon/employees.svg", jLabel56.getWidth(), jLabel56.getHeight());
-        jLabel56.setIcon(empImage);
-
-        FlatSVGIcon leaveIcon = new FlatSVGIcon("icon/leave.svg", jLabel48.getWidth() - 115, jLabel48.getHeight());
-        jLabel48.setIcon(leaveIcon);
-
-//        FlatSVGIcon updateIcon = new FlatSVGIcon("icon/updateImage.svg", jButton1.getWidth() - 57, jButton1.getHeight() - 20);
-//        jButton1.setIcon(updateIcon);
-//        jButton2.setIcon(updateIcon);
-//        jButton5.setIcon(updateIcon);
-//        jButton6.setIcon(updateIcon);
-//        jButton9.setIcon(updateIcon);
-//        jButton10.setIcon(updateIcon);
     }
 
     private void loadDetails() {
         try {
-
-            ResultSet themeResultSet = DatabaseConnection.executeSearch("SELECT * FROM `theme`");
-            Vector<String> themeList = new Vector<>();
-
-            while (themeResultSet.next()) {
-                String themeName = themeResultSet.getString("theme_name");
-                themeList.add(themeName);
-                themeMap.put(themeName, themeResultSet.getString("id"));
-            }
-
-            DefaultComboBoxModel<String> themeModel = new DefaultComboBoxModel<>(themeList);
-            themeComboBox.setModel(themeModel);
-
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT `employee`.*, `employee_address`.`line1`, `employee_address`.`line2`, `city`.`city_name`, `district`.`district_name`, `province`.`province_name`, `country`.`country_name`, `theme`.`theme_name` FROM `employee` "
-                    + "LEFT JOIN `employee_address` ON `employee`.`email` = `employee_address`.`employee_email` "
-                    + "LEFT JOIN `city` ON `employee_address`.`city_id` = `city`.`id` "
+            ResultSet resultSet = DatabaseConnection.executeSearch(
+                    "SELECT `user`.*, `user_address`.`line1`, `user_address`.`line2`, `city`.`city_name`, `district`.`district_name`, `province`.`province_name`, `country`.`country_name`, `gender`.`name` AS gender_name "
+                    + "FROM `user` "
+                    + "LEFT JOIN `user_address` ON `user`.`email` = `user_address`.`user_email` "
+                    + "LEFT JOIN `city` ON `user_address`.`city_id` = `city`.`id` "
                     + "LEFT JOIN `district` ON `city`.`district_id` = `district`.`id` "
                     + "LEFT JOIN `province` ON `district`.`province_id` = `province`.`id` "
                     + "LEFT JOIN `country` ON `province`.`country_id` = `country`.`id` "
-                    + "LEFT JOIN `theme` ON `employee`.`theme_id` = `theme`.`id` "
-                    + "WHERE `employee`.`email` = '" + loggedInEmail + "'");
-
+                    + "LEFT JOIN `gender` ON `user`.`gender_id` = `gender`.`id` "
+                    + "WHERE `user`.`email` = '" + loggedInEmail + "'"
+            );
             if (resultSet.next()) {
-                // Populate employee details
-                jTextField1.setText(resultSet.getString("first_name"));
-                jTextField2.setText(resultSet.getString("last_name"));
-                jTextField3.setText(resultSet.getString("nic"));
-                jTextField4.setText(resultSet.getString("mobile"));
-
-                // Set gender based on gender_id
-
-                jTextField5.setText(resultSet.getString("line1"));
-                jTextField6.setText(resultSet.getString("line2"));
-
-                countryComboBox.setSelectedItem(resultSet.getString("country.country_name"));
-                provinceComboBox.setSelectedItem(resultSet.getString("province.province_name"));
-                districtComboBox.setSelectedItem(resultSet.getString("district.district_name"));
-                cityComboBox.setSelectedItem(resultSet.getString("city.city_name"));
-
-                // Load selected theme
-                String employeeTheme = resultSet.getString("theme.theme_name");
-                themeComboBox.setSelectedItem(employeeTheme);
+                jTextField7.setText(resultSet.getString("first_name"));
+                jTextField8.setText(resultSet.getString("last_name"));
+                jTextField10.setText(resultSet.getString("nic"));
+                jTextField11.setText(resultSet.getString("mobile"));
+                jTextField14.setText(resultSet.getString("whatsapp_number"));
+                jTextField12.setText(resultSet.getString("line1"));
+                jTextField13.setText(resultSet.getString("line2"));
+                countryComboBox1.setSelectedItem(resultSet.getString("country_name"));
+                provinceComboBox1.setSelectedItem(resultSet.getString("province_name"));
+                districtComboBox1.setSelectedItem(resultSet.getString("district_name"));
+                cityComboBox1.setSelectedItem(resultSet.getString("city_name"));
+                jComboBox2.setSelectedItem(resultSet.getString("gender_name"));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -401,68 +288,61 @@ public class SettingsPanel extends javax.swing.JPanel {
 
     }
 
-    private void loadBankCountry(String bankCountry) {
-
+    private void loadBankCountry(String bankId) {
         try {
-
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `bank` WHERE `id` = '" + bankCountry + "'");
-
-            Vector vector = new Vector();
-
+            ResultSet resultSet = DatabaseConnection.executeSearch(
+                    "SELECT country.country_name FROM `bank` "
+                    + "INNER JOIN `country` ON `bank`.`country_id` = `country`.`id` "
+                    + "WHERE `bank`.`id` = '" + bankId + "'"
+            );
+            Vector<String> vector = new Vector<>();
             while (resultSet.next()) {
-                vector.add(resultSet.getString("country"));
+                vector.add(resultSet.getString("country_name"));
             }
-
             DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
             bankCountryComboBox.setModel(model);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadBankDetails() {
-
         try {
-            ResultSet bankresultSet = DatabaseConnection.executeSearch("SELECT * FROM `bank_details` "
+            ResultSet bankresultSet = DatabaseConnection.executeSearch(
+                    "SELECT * FROM `bank_details` "
                     + "INNER JOIN `bank` ON `bank_details`.`bank_id` = `bank`.`id` "
-                    + "WHERE `bank_details`.`employee_email` = '" + loggedInEmail + "'");
-
+                    + "WHERE `bank_details`.`user_email` = '" + loggedInEmail + "'"
+            );
             if (bankresultSet.next()) {
-                jTextField7.setText(bankresultSet.getString("name"));
-                jTextField8.setText(bankresultSet.getString("acnumber"));
-                jTextField11.setText(bankresultSet.getString("branch"));
+                jTextField15.setText(bankresultSet.getString("name"));
+                jTextField16.setText(bankresultSet.getString("acnumber"));
+                jTextField17.setText(bankresultSet.getString("branch"));
                 jTextArea1.setText(bankresultSet.getString("description"));
-
                 bankComboBox.setSelectedItem(bankresultSet.getString("bank_name"));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void changePassword() {
-        // TODO add your handling code here:
         String currentPassword = String.valueOf(jPasswordField1.getPassword());
         String newPassword = String.valueOf(jPasswordField2.getPassword());
         String confirmPassword = String.valueOf(jPasswordField3.getPassword());
 
-// Validate current password
+        // Validate current password
         if (currentPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Current password cannot be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-// Validate new password
+        // Validate new password
         if (newPassword.isEmpty() || newPassword.length() < 8) {
             JOptionPane.showMessageDialog(this, "New password must be at least 8 characters long.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-// Validate confirm password
+        // Validate confirm password
         if (!newPassword.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "New password and confirm password do not match.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -470,7 +350,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         try {
             // Check if the current password is correct
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `employee` WHERE `email` = '" + SignInWindow.getEmployeeEmail() + "' AND `password` = '" + currentPassword + "'");
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `user` WHERE `email` = '" + loggedInEmail + "' AND `password` = '" + currentPassword + "'");
 
             if (!resultSet.next()) {
                 JOptionPane.showMessageDialog(this, "Current password is incorrect.", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -485,7 +365,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             if (response == JOptionPane.YES_OPTION) {
                 try {
                     // Proceed with updating the password
-                    DatabaseConnection.executeIUD("UPDATE `employee` SET `password` = '" + newPassword + "' WHERE `email` = '" + SignInWindow.getEmployeeEmail() + "'");
+                    DatabaseConnection.executeIUD("UPDATE `user` SET `password` = '" + newPassword + "' WHERE `email` = '" + loggedInEmail + "'");
 
                     // Inform the user that the update was successful
                     JOptionPane.showMessageDialog(this, "Password updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -515,56 +395,60 @@ public class SettingsPanel extends javax.swing.JPanel {
     }
 
     private void changeUserDetails() {
-
         try {
-            String first_name = jTextField1.getText().trim();
-            String last_name = jTextField2.getText().trim();
-            String nic = jTextField3.getText().trim();
-            String mobile = jTextField4.getText().trim();
-            String line1 = jTextField5.getText().trim();
-            String line2 = jTextField6.getText().trim();
-            String country_name = String.valueOf(countryComboBox.getSelectedItem());
-            String province_name = String.valueOf(provinceComboBox.getSelectedItem());
-            String district_name = String.valueOf(districtComboBox.getSelectedItem());
-            String city_name = String.valueOf(cityComboBox.getSelectedItem());
+            String first_name = jTextField7.getText().trim(); // Use jTextField7
+            String last_name = jTextField8.getText().trim(); // Use jTextField8
+            String nic = jTextField10.getText().trim(); // Use jTextField10
+            String mobile = jTextField11.getText().trim(); // Use jTextField11
+            String whatsapp = jTextField14.getText().trim(); // Already correct
+            String line1 = jTextField12.getText().trim(); // Use jTextField12
+            String line2 = jTextField13.getText().trim(); // Use jTextField13
+            String country_name = String.valueOf(countryComboBox1.getSelectedItem()); // Use countryComboBox1
+            String province_name = String.valueOf(provinceComboBox1.getSelectedItem()); // Use provinceComboBox1
+            String district_name = String.valueOf(districtComboBox1.getSelectedItem()); // Use districtComboBox1
+            String city_name = String.valueOf(cityComboBox1.getSelectedItem()); // Use cityComboBox1
+            String gender = String.valueOf(jComboBox2.getSelectedItem());
 
             if (first_name.isEmpty() || !first_name.matches("[a-zA-Z]+")) {
                 JOptionPane.showMessageDialog(this, "Invalid first name. It must only contain letters and cannot be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-
             if (last_name.isEmpty() || !last_name.matches("[a-zA-Z]+")) {
                 JOptionPane.showMessageDialog(this, "Invalid last name. It must only contain letters and cannot be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-
             if (!nic.matches("[a-zA-Z0-9\\-\\s]+")) {
                 JOptionPane.showMessageDialog(this, "Invalid NIC format. It must contain only letters, numbers, spaces, or hyphens.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-
             if (!mobile.matches("\\+?[0-9\\s\\-]+") || mobile.length() < 7 || mobile.length() > 15) {
                 JOptionPane.showMessageDialog(this, "Invalid mobile number. It must contain only digits, spaces, hyphens, and may start with +.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!whatsapp.isEmpty() && (!whatsapp.matches("\\+?[0-9\\s\\-]+") || whatsapp.length() < 7 || whatsapp.length() > 15)) {
+                JOptionPane.showMessageDialog(this, "Invalid WhatsApp number. It must contain only digits, spaces, hyphens, and may start with +.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
             }
 
-            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `employee` WHERE (`nic` = '" + nic + "' OR `mobile` = '" + mobile + "') AND `email` != '" + SignInWindow.getEmployeeEmail() + "'");
+            ResultSet genderResultSet = DatabaseConnection.executeSearch("SELECT id FROM `gender` WHERE `name` = '" + gender + "'");
+            String genderId = genderResultSet.next() ? genderResultSet.getString("id") : "1";
 
+            ResultSet resultSet = DatabaseConnection.executeSearch("SELECT * FROM `user` WHERE (`nic` = '" + nic + "' OR `mobile` = '" + mobile + "' OR `whatsapp_number` = '" + whatsapp + "') AND `email` != '" + loggedInEmail + "'");
             if (resultSet.next()) {
-                JOptionPane.showMessageDialog(this, "This NIC or mobile number is already registered.", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "This NIC, mobile number, or WhatsApp number is already registered.", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
                 int response = JOptionPane.showConfirmDialog(this,
                         "Are you sure you want to update your information?",
                         "Confirm Update",
                         JOptionPane.YES_NO_OPTION);
-
                 if (response == JOptionPane.YES_OPTION) {
-                    ResultSet addressCheck = DatabaseConnection.executeSearch("SELECT COUNT(*) FROM employee_address WHERE employee_email = '" + SignInWindow.getEmployeeEmail() + "'");
-
+                    ResultSet addressCheck = DatabaseConnection.executeSearch("SELECT COUNT(*) FROM user_address WHERE user_email = '" + loggedInEmail + "'");
                     if (addressCheck.next() && addressCheck.getInt(1) > 0) {
-                        DatabaseConnection.executeIUD("UPDATE employee SET first_name = '" + first_name + "', last_name = '" + last_name + "', nic = '" + nic + "', mobile = '" + mobile + "', gender_id = '" + gender + "' WHERE email = '" + SignInWindow.getEmployeeEmail() + "'");
-                        DatabaseConnection.executeIUD("UPDATE employee_address SET line1 = '" + line1 + "', line2 = '" + line2 + "', city_id = '" + cityMap.get(city_name) + "' WHERE employee_email = '" + SignInWindow.getEmployeeEmail() + "'");
-
+                        DatabaseConnection.executeIUD("UPDATE user SET first_name = '" + first_name + "', last_name = '" + last_name + "', nic = '" + nic + "', mobile = '" + mobile + "', whatsapp_number = '" + whatsapp + "', gender_id = '" + genderId + "' WHERE email = '" + loggedInEmail + "'");
+                        DatabaseConnection.executeIUD("UPDATE user_address SET line1 = '" + line1 + "', line2 = '" + line2 + "', city_id = '" + cityMap.get(city_name) + "' WHERE user_email = '" + loggedInEmail + "'");
                         JOptionPane.showMessageDialog(this, "Information updated successfully!");
                     } else {
-                        DatabaseConnection.executeIUD("INSERT INTO employee_address (employee_email, line1, line2, city_id) VALUES ('" + SignInWindow.getEmployeeEmail() + "', '" + line1 + "', '" + line2 + "', '" + cityMap.get(city_name) + "')");
-
+                        DatabaseConnection.executeIUD("INSERT INTO user_address (user_email, line1, line2, city_id) VALUES ('" + loggedInEmail + "', '" + line1 + "', '" + line2 + "', '" + cityMap.get(city_name) + "')");
                         JOptionPane.showMessageDialog(this, "Address added successfully!");
                     }
                 } else {
@@ -572,24 +456,21 @@ public class SettingsPanel extends javax.swing.JPanel {
                     loadDetails();
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void addOrUpdateBankDetails() {
-
         try {
             ResultSet bankresultSet = DatabaseConnection.executeSearch("SELECT * FROM `bank_details` "
                     + "INNER JOIN `bank` ON `bank_details`.`bank_id` = `bank`.`id` "
-                    + "WHERE `bank_details`.`employee_email` = '" + loggedInEmail + "'");
+                    + "WHERE `bank_details`.`user_email` = '" + loggedInEmail + "'");
 
-            String name = jTextField7.getText();
-            String acnumber = jTextField8.getText();
-            String branch = jTextField11.getText();
+            String name = jTextField15.getText();
+            String acnumber = jTextField16.getText();
+            String branch = jTextField17.getText();
             String description = jTextArea1.getText();
-
             String bank_name = String.valueOf(bankComboBox.getSelectedItem());
 
             if (name.isEmpty() || acnumber.isEmpty() || branch.isEmpty() || description.isEmpty() || bank_name == null) {
@@ -598,7 +479,10 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
 
             if (!bankresultSet.next()) {
-                DatabaseConnection.executeIUD("INSERT INTO `bank_details`(`name`, `acnumber`, `branch`, `description`, `bank_id`, `employee_email`) VALUES ('" + name + "', '" + acnumber + "', '" + branch + "', '" + description + "', " + bankMap.get(bank_name) + ", '" + userEmail + "')");
+                DatabaseConnection.executeIUD(
+                        "INSERT INTO `bank_details`(`name`, `acnumber`, `branch`, `description`, `bank_id`, `user_email`) VALUES ('"
+                        + name + "', '" + acnumber + "', '" + branch + "', '" + description + "', " + bankMap.get(bank_name) + ", '" + loggedInEmail + "')"
+                );
                 JOptionPane.showMessageDialog(this, "Bank details added successfully.");
             } else {
                 int response = JOptionPane.showConfirmDialog(this,
@@ -607,17 +491,17 @@ public class SettingsPanel extends javax.swing.JPanel {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
-                    DatabaseConnection.executeIUD("UPDATE `bank_details` SET `name` = '" + name + "', `acnumber` = '" + acnumber + "', `branch` = '" + branch + "', `description` = '" + description + "', `bank_id` = " + bankMap.get(bank_name) + " WHERE `employee_email` = '" + userEmail + "'");
+                    DatabaseConnection.executeIUD(
+                            "UPDATE `bank_details` SET `name` = '" + name + "', `acnumber` = '" + acnumber + "', `branch` = '" + branch + "', `description` = '" + description + "', `bank_id` = " + bankMap.get(bank_name) + " WHERE `user_email` = '" + loggedInEmail + "'"
+                    );
                     JOptionPane.showMessageDialog(this, "Bank details updated successfully.");
                 } else {
                     JOptionPane.showMessageDialog(this, "Update canceled.");
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -680,10 +564,6 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel50 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
-        jPanel21 = new javax.swing.JPanel();
-        themeComboBox = new javax.swing.JComboBox<>();
-        jLabel52 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
         jPanel23 = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
@@ -726,7 +606,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         jLabel21.setText("Manage your account settings and preferences");
 
-        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 3));
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255), 3));
         jPanel16.setToolTipText("");
         jPanel16.setPreferredSize(new java.awt.Dimension(609, 649));
 
@@ -789,7 +669,6 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
-        countryComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         countryComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 countryComboBox1ItemStateChanged(evt);
@@ -800,18 +679,14 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         jLabel38.setText("Province");
 
-        provinceComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         provinceComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 provinceComboBox1ItemStateChanged(evt);
             }
         });
 
-        cityComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel39.setText("City");
 
-        districtComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         districtComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 districtComboBox1ItemStateChanged(evt);
@@ -820,7 +695,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         jLabel40.setText("District");
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 51));
+        jButton2.setBackground(new java.awt.Color(0, 153, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton2.setText("Save");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -850,52 +725,55 @@ public class SettingsPanel extends javax.swing.JPanel {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel42)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel41)
-                            .addComponent(jLabel42))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField10)
-                            .addComponent(jTextField11)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel17Layout.createSequentialGroup()
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(districtComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel40))
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cityComboBox1, 0, 123, Short.MAX_VALUE)
-                                    .addComponent(jLabel39)))
-                            .addComponent(jTextField14))
-                        .addGap(19, 19, 19))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel33)
-                            .addComponent(jLabel36))
-                        .addContainerGap())
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel37)
-                            .addComponent(countryComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                            .addComponent(countryComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel38)
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(provinceComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(19, 19, 19))))))
+                                .addGap(19, 19, 19))))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField13)
+                            .addComponent(jTextField12)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel30)
+                                            .addComponent(jLabel31)
+                                            .addComponent(jLabel32))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel41)
+                                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel40)
+                                    .addComponent(districtComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel39)
+                                    .addComponent(cityComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel36))
+                        .addGap(19, 19, 19))))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -914,14 +792,14 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(jLabel32)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel41))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel41)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel42)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -951,7 +829,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                         .addComponent(jLabel39)
                         .addGap(6, 6, 6)
                         .addComponent(cityComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                .addGap(23, 23, 23))
         );
 
         jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
@@ -983,7 +861,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 51));
+        jButton3.setBackground(new java.awt.Color(0, 153, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton3.setText("Save");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -993,6 +871,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"))); // NOI18N
         jLabel46.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel46.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1000,6 +879,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"))); // NOI18N
         jLabel47.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel47.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1007,6 +887,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"))); // NOI18N
         jLabel48.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel48.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1091,7 +972,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(0, 204, 51));
+        jButton6.setBackground(new java.awt.Color(0, 153, 255));
         jButton6.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton6.setText("Save");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1109,7 +990,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1143,14 +1024,14 @@ public class SettingsPanel extends javax.swing.JPanel {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addContainerGap())
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1168,57 +1049,13 @@ public class SettingsPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
-        jPanel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 3));
+        jPanel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255), 3));
 
         jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel51.setText("Others");
-
-        jPanel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
-
-        themeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel52.setText("Theme Change");
-
-        jButton7.setBackground(new java.awt.Color(0, 204, 51));
-        jButton7.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton7.setText("Apply");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel52)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)))
-                .addGap(0, 0, 0))
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel52))
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(themeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
 
         jPanel23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
 
@@ -1241,7 +1078,7 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(0, 204, 51));
+        jButton10.setBackground(new java.awt.Color(0, 153, 255));
         jButton10.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton10.setText("Save");
         jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1294,7 +1131,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel55)
@@ -1355,7 +1192,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         jLabel62.setText("Country");
 
-        jButton11.setBackground(new java.awt.Color(0, 204, 51));
+        jButton11.setBackground(new java.awt.Color(0, 153, 255));
         jButton11.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton11.setText("Save");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1371,29 +1208,13 @@ public class SettingsPanel extends javax.swing.JPanel {
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel57)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel58)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel61)
-                                .addGap(102, 102, 102))
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jTextField17)
-                                .addGap(6, 6, 6)))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel59)
-                                .addGap(0, 87, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(8, 8, 8))))
+                    .addComponent(jLabel57)
+                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel58)
+                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1410,6 +1231,18 @@ public class SettingsPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton11))
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel61)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(jLabel59)
+                        .addGap(0, 91, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1423,29 +1256,26 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField15)
                     .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel62)
                     .addComponent(jLabel60))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bankCountryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(bankCountryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel61)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
-                            .addGroup(jPanel24Layout.createSequentialGroup()
-                                .addComponent(jLabel59)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
+                        .addComponent(jLabel61)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(bankComboBox)
-                        .addGap(75, 75, 75))))
+                        .addComponent(jLabel59)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -1453,13 +1283,12 @@ public class SettingsPanel extends javax.swing.JPanel {
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel51)
-                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel51))
+                .addGap(20, 20, 20))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1467,10 +1296,8 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel51)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1592,10 +1419,10 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel21)
                 .addGap(15, 15, 15)
                 .addGroup(settingsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminProPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1611,7 +1438,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 842, Short.MAX_VALUE)
+            .addGap(0, 795, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1659,18 +1486,18 @@ public class SettingsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField13jTextField2KeyPressed
 
     private void countryComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_countryComboBox1ItemStateChanged
-        loadProvice(countryMap.get(String.valueOf(countryComboBox.getSelectedItem())));
-        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox.getSelectedItem())));
-        loadCity(districtMap.get(String.valueOf(districtComboBox.getSelectedItem())));
+        loadProvice(countryMap.get(String.valueOf(countryComboBox1.getSelectedItem())));
+        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox1.getSelectedItem())));
+        loadCity(districtMap.get(String.valueOf(districtComboBox1.getSelectedItem())));
     }//GEN-LAST:event_countryComboBox1ItemStateChanged
 
     private void provinceComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_provinceComboBox1ItemStateChanged
-        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox.getSelectedItem())));
-        loadCity(districtMap.get(String.valueOf(districtComboBox.getSelectedItem())));
+        loadDistrict(provinceMap.get(String.valueOf(provinceComboBox1.getSelectedItem())));
+        loadCity(districtMap.get(String.valueOf(districtComboBox1.getSelectedItem())));
     }//GEN-LAST:event_provinceComboBox1ItemStateChanged
 
     private void districtComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_districtComboBox1ItemStateChanged
-        loadCity(districtMap.get(String.valueOf(districtComboBox.getSelectedItem())));
+        loadCity(districtMap.get(String.valueOf(districtComboBox1.getSelectedItem())));
     }//GEN-LAST:event_districtComboBox1ItemStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1704,27 +1531,26 @@ public class SettingsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel46MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel46MouseClicked
-
         if (jPasswordField1.getEchoChar() == '•') {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/view.png"));
-            jLabel36.setIcon(eye);
-            jPasswordField1.setEchoChar((char) 0); // show password
-        } else if (evt.getClickCount() == 1) {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/close-eyes.png"));
-            jLabel36.setIcon(eye);
-            jPasswordField1.setEchoChar('•'); //hide password
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/view.png"));
+            jLabel46.setIcon(eye);
+            jPasswordField1.setEchoChar((char) 0); // Show password
+        } else {
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"));
+            jLabel46.setIcon(eye);
+            jPasswordField1.setEchoChar('•'); // Hide password
         }
     }//GEN-LAST:event_jLabel46MouseClicked
 
     private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
 
         if (jPasswordField2.getEchoChar() == '•') {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/view.png"));
-            jLabel37.setIcon(eye);
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/view.png"));
+            jLabel47.setIcon(eye);
             jPasswordField2.setEchoChar((char) 0); // show password
         } else if (evt.getClickCount() == 1) {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/close-eyes.png"));
-            jLabel37.setIcon(eye);
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"));
+            jLabel47.setIcon(eye);
             jPasswordField2.setEchoChar('•'); //hide password
         }
     }//GEN-LAST:event_jLabel47MouseClicked
@@ -1732,12 +1558,12 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void jLabel48MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel48MouseClicked
 
         if (jPasswordField3.getEchoChar() == '•') {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/view.png"));
-            jLabel38.setIcon(eye);
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/view.png"));
+            jLabel48.setIcon(eye);
             jPasswordField3.setEchoChar((char) 0); // show password
         } else if (evt.getClickCount() == 1) {
-            ImageIcon eye = new ImageIcon(getClass().getResource("/icon/close-eyes.png"));
-            jLabel38.setIcon(eye);
+            ImageIcon eye = new ImageIcon(getClass().getResource("/com/lexso/users/icon/close-eyes.png"));
+            jLabel48.setIcon(eye);
             jPasswordField3.setEchoChar('•'); //hide password
         }
     }//GEN-LAST:event_jLabel48MouseClicked
@@ -1756,7 +1582,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 Image img = icon.getImage();
                 Image resizedImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(resizedImg);
-                jLabel33.setIcon(resizedIcon);
+                jLabel49.setIcon(resizedIcon);
                 jButton5.grabFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Please select a valid image file (.png, .jpg, .jpeg).");
@@ -1766,32 +1592,31 @@ public class SettingsPanel extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         selectedFile = null;
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/man.png"));
-        jLabel33.setIcon(icon);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/com/lexso/users/profilepics/man.png"));
+        jLabel49.setIcon(icon);
         jButton5.grabFocus();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        Icon icon = jLabel33.getIcon();
+        Icon icon = jLabel49.getIcon(); // Corrected from jLabel33
 
         if (selectedFile != null || icon != null) {
-
             if (selectedFile != null) {
                 try {
                     // Generate a random number for the file name prefix
                     Random random = new Random();
-                    int randomNumber = random.nextInt(100000); // You can adjust the range as needed
+                    int randomNumber = random.nextInt(100000);
                     String originalFileName = selectedFile.getName();
                     String newFileName = randomNumber + "_" + originalFileName;
 
                     // Specify the target directory and file name
-                    String targetDir = "profileImages";  // Directory to save the image
+                    String targetDir = "src/com/lexso/users/profilepics"; // Align with new schema
                     File dir = new File(targetDir);
 
                     // Create directory if it does not exist
                     if (!dir.exists()) {
-                        dir.mkdir();
+                        dir.mkdirs();
                     }
 
                     // Specify the target file path with the new file name
@@ -1801,14 +1626,10 @@ public class SettingsPanel extends javax.swing.JPanel {
                     Files.copy(selectedFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                     try {
-
-                        String path = targetFile.getAbsolutePath();
-                        String correctedPath = path.replace("\\", "\\\\");
-
-                        DatabaseConnection.executeIUD("UPDATE `employee` SET `profile_picture` = '" + correctedPath + "' WHERE `email`= '" + SignInWindow.getEmployeeEmail() + "'");
+                        String path = "/com/lexso/users/profilepics/" + newFileName; // Store relative path
+                        DatabaseConnection.executeIUD("UPDATE `user` SET `profile_picture` = '" + path + "' WHERE `email`= '" + loggedInEmail + "'");
                         loadProfilePic(loggedInEmail);
-                        jLabel33.setIcon(null);
-
+                        jLabel49.setIcon(null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1819,33 +1640,18 @@ public class SettingsPanel extends javax.swing.JPanel {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Error saving profile picture.");
                 }
-
             } else {
-
                 try {
-                    DatabaseConnection.executeIUD("UPDATE `employee` SET `profile_picture` = 'no' WHERE `email`= '" + SignInWindow.getEmployeeEmail() + "'");
+                    DatabaseConnection.executeIUD("UPDATE `user` SET `profile_picture` = '/com/lexso/users/profilepics/man.png' WHERE `email`= '" + loggedInEmail + "'");
                     loadProfilePic(loggedInEmail);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "No file selected.");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
-        String theme = String.valueOf(themeComboBox.getSelectedItem());
-
-        try {
-            DatabaseConnection.executeIUD("UPDATE `employee` SET `theme_id` = '" + themeMap.get(theme) + "' WHERE `email` = '" + SignInWindow.getEmployeeEmail() + "'");;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         fileChooser = new JFileChooser();
@@ -1860,7 +1666,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 Image img = icon.getImage();
                 Image resizedImg = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(resizedImg);
-                jLabel40.setIcon(resizedIcon);
+                jLabel53.setIcon(resizedIcon);
                 jButton9.grabFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Please select a valid image file (.png, .jpg, .jpeg).");
@@ -1870,32 +1676,31 @@ public class SettingsPanel extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         selectedFile = null;
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icon/nullsignature.png"));
-        jLabel40.setIcon(icon);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/com/lexso/users/signatures/nullsignature.png"));
+        jLabel53.setIcon(icon);
         jButton9.grabFocus();
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-
-        Icon icon = jLabel40.getIcon();
+        Icon icon = jLabel53.getIcon(); // Corrected from jLabel40
 
         if (selectedFile != null || icon != null) {
-
             if (selectedFile != null) {
                 try {
                     // Generate a random number for the file name prefix
                     Random random = new Random();
-                    int randomNumber = random.nextInt(100000); // You can adjust the range as needed
+                    int randomNumber = random.nextInt(100000);
                     String originalFileName = selectedFile.getName();
                     String newFileName = randomNumber + "_" + originalFileName;
 
                     // Specify the target directory and file name
-                    String targetDir = "Signatures";  // Directory to save the signature
+                    String targetDir = "src/com/lexso/users/signatures"; // Align with new schema
                     File dir = new File(targetDir);
 
                     // Create directory if it does not exist
                     if (!dir.exists()) {
-                        dir.mkdir();
+                        dir.mkdirs();
                     }
 
                     // Specify the target file path with the new file name
@@ -1905,13 +1710,10 @@ public class SettingsPanel extends javax.swing.JPanel {
                     Files.copy(selectedFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                     try {
-                        String path = targetFile.getAbsolutePath();
-                        String correctedPath = path.replace("\\", "\\\\");
-
-                        DatabaseConnection.executeIUD("UPDATE `employee` SET `signature` = '" + correctedPath + "' WHERE `email`= '" + SignInWindow.getEmployeeEmail() + "'");
+                        String path = "/com/lexso/users/signatures/" + newFileName; // Store relative path
+                        DatabaseConnection.executeIUD("UPDATE `user` SET `signature` = '" + path + "' WHERE `email`= '" + loggedInEmail + "'");
                         loadProfilePic(loggedInEmail);
-                        jLabel40.setIcon(null);
-
+                        jLabel53.setIcon(null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1922,20 +1724,17 @@ public class SettingsPanel extends javax.swing.JPanel {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Error saving signature.");
                 }
-
             } else {
-
                 try {
-                    DatabaseConnection.executeIUD("UPDATE `employee` SET `signature` = 'no' WHERE `email`= '" + SignInWindow.getEmployeeEmail() + "'");
+                    DatabaseConnection.executeIUD("UPDATE `user` SET `signature` = '/com/lexso/users/signatures/nullsignature.png' WHERE `email`= '" + loggedInEmail + "'");
                     loadProfilePic(loggedInEmail);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "No file selected.");
+
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -1973,11 +1772,12 @@ public class SettingsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jLabel63MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel63MouseClicked
-        
+        AllBankAccountsWindow allBankAccountsWindow = new AllBankAccountsWindow();
+        allBankAccountsWindow.setVisible(true);
     }//GEN-LAST:event_jLabel63MouseClicked
 
     private void jLabel65MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel65MouseClicked
-      
+
     }//GEN-LAST:event_jLabel65MouseClicked
 
 
@@ -1985,13 +1785,9 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel adminProPanel;
     private javax.swing.JComboBox<String> bankComboBox;
     private javax.swing.JComboBox<String> bankCountryComboBox;
-    private javax.swing.JComboBox<String> cityComboBox;
     private javax.swing.JComboBox<String> cityComboBox1;
-    private javax.swing.JComboBox<String> countryComboBox;
     private javax.swing.JComboBox<String> countryComboBox1;
-    private javax.swing.JComboBox<String> districtComboBox;
     private javax.swing.JComboBox<String> districtComboBox1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1999,37 +1795,20 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -2043,7 +1822,6 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
@@ -2065,14 +1843,11 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPasswordField jPasswordField1;
@@ -2080,7 +1855,6 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -2089,18 +1863,9 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JComboBox<String> provinceComboBox;
     private javax.swing.JComboBox<String> provinceComboBox1;
-    private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel settingsPanel1;
-    private javax.swing.JComboBox<String> themeComboBox;
     // End of variables declaration//GEN-END:variables
 }

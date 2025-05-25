@@ -16,9 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.lexso.connection.DatabaseConnection;
+import com.lexso.contacts.ContactPanel;
 import com.lexso.employee.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
+import com.lexso.users.settings.SettingsPanel;
 import com.lexso.util.CurrentUser;
 import java.util.prefs.Preferences;
 import javax.swing.JPanel;
@@ -612,12 +614,12 @@ public class DashboardWindow extends javax.swing.JFrame {
         );
 
         jLabel45.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel45.setForeground(new java.awt.Color(51, 153, 255));
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel45.setText("System Time");
 
         jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel46.setForeground(new java.awt.Color(102, 204, 255));
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel46.setText("System Time");
 
@@ -853,6 +855,10 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel9.setBackground(selectedColor);
         currentlySelectedPanel = jPanel9;
+
+        // Load the EmployeePanel into jPanel11
+        loadPanel(new SettingsPanel(), "SettingsPanel loaded successfully into jPanel11.");
+
     }//GEN-LAST:event_jPanel9MouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
@@ -861,6 +867,8 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel10.setBackground(selectedColor);
         currentlySelectedPanel = jPanel10;
+        
+        loadPanel(new ContactPanel(), "ContactUsPanel loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel10MouseClicked
 
     private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
@@ -972,10 +980,67 @@ public class DashboardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel10MouseExited
 
     private void refreshLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshLabelMouseClicked
+        try {
+            displayUserData();
 
-        DashboardWindow dw = new DashboardWindow();
-        dw.setVisible(true);
-        this.dispose();
+            loadProfilePic(loggedInEmail);
+
+            updateCurrentTime();
+            updateCurrentDate();
+
+            // Refresh the currently loaded panel in jPanel11
+            if (currentlySelectedPanel != null) {
+                JPanel panelToLoad = null;
+                String logMessage = null;
+
+                if (currentlySelectedPanel == jPanel2) {
+                    panelToLoad = new JPanel();
+                    logMessage = "Dashboard panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel7) {
+                    panelToLoad = new EmployeePanel();
+                    logMessage = "EmployeePanel refreshed successfully into jPanel11.";
+                } else if (currentlySelectedPanel == jPanel9) {
+                    panelToLoad = new SettingsPanel();
+                    logMessage = "SettingsPanel refreshed successfully into jPanel11.";
+                } else if (currentlySelectedPanel == jPanel3) {
+                    // POS Operations panel
+                    panelToLoad = new JPanel();
+                    logMessage = "POS Operations panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel4) {
+                    // Inventory panel
+                    panelToLoad = new JPanel();
+                    logMessage = "Inventory panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel5) {
+                    // Purchasing & Suppliers panel
+                    panelToLoad = new JPanel();
+                    logMessage = "Purchasing & Suppliers panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel6) {
+                    // Customers panel
+                    panelToLoad = new JPanel();
+                    logMessage = "Customers panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel8) {
+                    // Reports panel
+                    panelToLoad = new JPanel();
+                    logMessage = "Reports panel refreshed successfully.";
+                } else if (currentlySelectedPanel == jPanel10) {
+                    // Help panel
+                    panelToLoad = new JPanel();
+                    logMessage = "Help panel refreshed successfully.";
+                }
+
+                if (panelToLoad != null && logMessage != null) {
+                    loadPanel(panelToLoad, logMessage);
+                }
+            } else {
+                loadPanel(new JPanel(), "Default dashboard panel refreshed successfully.");
+            }
+
+            LOGGER.info("Dashboard UI refreshed successfully on refresh label click.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.severe("Error refreshing dashboard UI: " + e.getMessage());
+        }
     }//GEN-LAST:event_refreshLabelMouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
