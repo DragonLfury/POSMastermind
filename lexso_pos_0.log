@@ -838,3 +838,35 @@ May 25, 2025 10:46:07 PM com.lexso.employee.EmployeePanel <init>
 INFO: EmployeePanel initialized successfully.
 May 25, 2025 10:46:07 PM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: EmployeePanel loaded successfully into jPanel11.
+May 25, 2025 11:11:19 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 25, 2025 11:11:19 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 25, 2025 11:11:22 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+May 25, 2025 11:11:57 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 25, 2025 11:11:57 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 25, 2025 11:12:00 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+May 25, 2025 11:12:27 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 25, 2025 11:12:27 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 25, 2025 11:12:29 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+May 25, 2025 11:12:31 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+May 25, 2025 11:13:00 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 25, 2025 11:13:00 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 25, 2025 11:13:03 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+May 25, 2025 11:13:29 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 25, 2025 11:13:30 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 25, 2025 11:13:32 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
