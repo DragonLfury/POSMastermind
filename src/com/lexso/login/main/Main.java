@@ -1,7 +1,6 @@
 package com.lexso.login.main;
 
 import com.lexso.connection.DatabaseConnection;
-import com.lexso.dashboard.main.Dashboard;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.FileHandler;
