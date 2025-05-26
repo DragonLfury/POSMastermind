@@ -765,7 +765,7 @@ public class DashboardWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1039,7 +1039,7 @@ public class DashboardWindow extends javax.swing.JFrame {
                 loadPanel(new JPanel(), "Default dashboard panel refreshed successfully.");
             }
             loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
-
+            jPanel2MouseClicked(evt);
             LOGGER.info("Dashboard UI refreshed successfully on refresh label click.");
 
         } catch (Exception e) {
