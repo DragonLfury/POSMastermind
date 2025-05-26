@@ -294,19 +294,28 @@ public class Overview extends javax.swing.JPanel {
         jButton1.setText("View All Members");
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 204, 0));
         jLabel27.setText("01");
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(102, 102, 102));
         jLabel28.setText("02");
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 102, 51));
         jLabel29.setText("03");
 
-        jLabel33.setText("1000");
+        jLabel30.setForeground(new java.awt.Color(255, 204, 0));
 
-        jLabel34.setText("1000");
+        jLabel31.setForeground(new java.awt.Color(102, 102, 102));
 
-        jLabel35.setText("1000");
+        jLabel32.setForeground(new java.awt.Color(255, 102, 51));
+
+        jLabel33.setText("00000");
+
+        jLabel34.setText("00000");
+
+        jLabel35.setText("00000");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -376,6 +385,8 @@ public class Overview extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setText("Quick Actions");
 
+        jPanel11.setBackground(new java.awt.Color(204, 229, 255));
+
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Backup");
@@ -402,6 +413,8 @@ public class Overview extends javax.swing.JPanel {
                 .addComponent(jLabel23)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        jPanel12.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -430,6 +443,8 @@ public class Overview extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jPanel13.setBackground(new java.awt.Color(204, 204, 255));
+
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("POS System");
@@ -456,6 +471,8 @@ public class Overview extends javax.swing.JPanel {
                 .addComponent(jLabel26)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        jPanel14.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
