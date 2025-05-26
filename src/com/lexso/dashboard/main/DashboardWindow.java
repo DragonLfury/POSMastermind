@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
+import com.lexso.dashboard.Overview;
 import com.lexso.employee.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
@@ -64,7 +65,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         loadProfilePic(loggedInEmail);
         jPanel2.setBackground(selectedColor);
         currentlySelectedPanel = jPanel2;
-
+        loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
     }
 
     public void displayUserData() {
@@ -141,7 +142,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         FlatSVGIcon logoutIcon = new FlatSVGIcon("com/lexso/dashboard/icon/logout.svg", logoutLabel.getWidth(), logoutLabel.getHeight());
         logoutLabel.setIcon(logoutIcon);
 
-        FlatSVGIcon refresImage = new FlatSVGIcon("com/lexso/dashboard/icon/refresh.svg", refreshLabel.getWidth(), refreshLabel.getHeight());
+        FlatSVGIcon refresImage = new FlatSVGIcon("com/lexso/dashboard/icon/refresh.svg", refreshLabel.getWidth() - 12, refreshLabel.getHeight() - 10);
         refreshLabel.setIcon(refresImage);
 
 //        FlatSVGIcon updateIcon = new FlatSVGIcon("icon/updateImage.svg", jButton1.getWidth() - 57, jButton1.getHeight() - 20);
@@ -726,6 +727,8 @@ public class DashboardWindow extends javax.swing.JFrame {
             }
         });
 
+        refreshLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        refreshLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         refreshLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 refreshLabelMouseClicked(evt);
@@ -786,6 +789,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel2.setBackground(selectedColor);
         currentlySelectedPanel = jPanel2;
+        loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
@@ -867,7 +871,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel10.setBackground(selectedColor);
         currentlySelectedPanel = jPanel10;
-        
+
         loadPanel(new ContactPanel(), "ContactUsPanel loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel10MouseClicked
 
@@ -1034,6 +1038,7 @@ public class DashboardWindow extends javax.swing.JFrame {
             } else {
                 loadPanel(new JPanel(), "Default dashboard panel refreshed successfully.");
             }
+            loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
 
             LOGGER.info("Dashboard UI refreshed successfully on refresh label click.");
 

@@ -4,6 +4,24 @@
  */
 package com.lexso.dashboard;
 
+import com.lexso.connection.DatabaseConnection;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.HashMap;
+import java.util.Map;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickUnit;
+import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+
 /**
  *
  * @author User
@@ -15,6 +33,79 @@ public class Overview extends javax.swing.JPanel {
      */
     public Overview() {
         initComponents();
+        loadSalesGrowthChart();
+    }
+
+    private void loadSalesGrowthChart() {
+        try {
+            LocalDate today = LocalDate.now();
+            YearMonth currentMonth = YearMonth.of(today.getYear(), today.getMonth());
+            int daysInMonth = currentMonth.lengthOfMonth();
+
+            Map<Integer, Double> salesMap = new HashMap<>();
+            for (int day = 1; day <= daysInMonth; day++) {
+                salesMap.put(day, 0.0);
+            }
+
+            String query = String.format(
+                    "SELECT DAY(date) AS day, SUM(paid_amount) AS total "
+                    + "FROM invoice "
+                    + "WHERE MONTH(date) = %d AND YEAR(date) = %d "
+                    + "GROUP BY DAY(date) ORDER BY DAY(date)",
+                    today.getMonthValue(), today.getYear()
+            );
+
+            ResultSet rs = DatabaseConnection.executeSearch(query);
+            while (rs.next()) {
+                int day = rs.getInt("day");
+                double total = rs.getDouble("total");
+                salesMap.put(day, total);
+            }
+            rs.close();
+
+            TimeSeries series = new TimeSeries("Daily Sales");
+            for (int day = 1; day <= daysInMonth; day++) {
+                double sales = salesMap.get(day);
+                series.add(new Day(day, today.getMonthValue(), today.getYear()), sales);
+            }
+
+            TimeSeriesCollection dataset = new TimeSeriesCollection(series);
+
+            JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                    null,
+                    "Date",
+                    "Sales (LKR)",
+                    dataset,
+                    true,
+                    true,
+                    false
+            );
+
+            // Customize the X axis to show every day as a tick label
+            XYPlot plot = chart.getXYPlot();
+            DateAxis domainAxis = (DateAxis) plot.getDomainAxis();
+
+            // Set tick unit to one day
+            domainAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1));
+
+            // Format tick labels to show only day number (1, 2, 3, ...)
+            domainAxis.setDateFormatOverride(new SimpleDateFormat("d"));
+
+            // Optional: rotate labels to avoid overlap
+            domainAxis.setVerticalTickLabels(true);
+
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(jPanel15.getSize());
+
+            jPanel15.removeAll();
+            jPanel15.setLayout(new java.awt.BorderLayout());
+            jPanel15.add(chartPanel, java.awt.BorderLayout.CENTER);
+            jPanel15.validate();
+            jPanel15.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -48,6 +139,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -246,13 +338,17 @@ public class Overview extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("Sales Growth (Last 30 Days)");
 
+        jPanel15.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel15)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -260,7 +356,9 @@ public class Overview extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel15)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -375,7 +473,7 @@ public class Overview extends javax.swing.JPanel {
                         .addComponent(jLabel29)
                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel34))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -629,6 +727,7 @@ public class Overview extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
