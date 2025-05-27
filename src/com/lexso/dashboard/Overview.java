@@ -7,7 +7,9 @@ package com.lexso.dashboard;
 import com.lexso.connection.DatabaseConnection;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Paint;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -17,17 +19,28 @@ import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardPieToolTipGenerator;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import static com.lexso.login.main.Main.LOGGER;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,109 +48,90 @@ import org.jfree.data.time.TimeSeriesCollection;
  */
 public class Overview extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Overview
-     */
     public Overview() {
         initComponents();
         loadSalesGrowthChart();
         loadSalesByCategoryChart();
-        loadTodayAttendance();
+        loadFastMovingItemsBarChart();
+        loadTotalProductCount();
+        loadLowStockItemsCount();
+        loadTotalSales30days();
+        loadTodayProfit();
+        loadAvgOrderValueCount();
+        LOGGER.log(Level.INFO, "Overview panel initialized and charts/data loaded.");
     }
 
     private void loadSalesGrowthChart() {
-        try {
-            LocalDate today = LocalDate.now();
-            YearMonth currentMonth = YearMonth.of(today.getYear(), today.getMonth());
-            int daysInMonth = currentMonth.lengthOfMonth();
-
-            Map<Integer, Double> salesMap = new HashMap<>();
-            Map<Integer, Double> profitMap = new HashMap<>(); // New map for profit data
-
-            for (int day = 1; day <= daysInMonth; day++) {
-                salesMap.put(day, 0.0);
-                profitMap.put(day, 0.0); // Initialize profit for each day
-            }
-
-            // Modified query to fetch both sales and profit
-            String query = String.format(
-                    "SELECT "
-                    + "    DAY(i.date) AS day, "
-                    + "    SUM(i.paid_amount) AS total_sales, "
-                    + "    SUM(ii.qty * (s.selling_price - s.buying_price)) AS total_profit " // Calculate profit
-                    + "FROM invoice i "
-                    + "JOIN invoice_item ii ON i.id = ii.invoice_id "
-                    + "JOIN stock s ON ii.stock_id = s.id "
-                    + "WHERE MONTH(i.date) = %d AND YEAR(i.date) = %d "
-                    + "GROUP BY DAY(i.date) ORDER BY DAY(i.date)",
-                    today.getMonthValue(), today.getYear()
-            );
-
-            ResultSet rs = com.lexso.connection.DatabaseConnection.executeSearch(query);
+        LocalDate today = LocalDate.now();
+        YearMonth currentMonth = YearMonth.of(today.getYear(), today.getMonth());
+        int daysInMonth = currentMonth.lengthOfMonth();
+        Map<Integer, Double> salesMap = new HashMap<>();
+        Map<Integer, Double> profitMap = new HashMap<>();
+        for (int day = 1; day <= daysInMonth; day++) {
+            salesMap.put(day, 0.0);
+            profitMap.put(day, 0.0);
+        }
+        String query = String.format(
+                "SELECT "
+                        + "    DAY(i.date) AS day, "
+                        + "    SUM(i.paid_amount) AS total_sales, "
+                        + "    SUM(ii.qty * (s.selling_price - s.buying_price)) AS total_profit "
+                        + "FROM invoice i "
+                        + "JOIN invoice_item ii ON i.id = ii.invoice_id "
+                        + "JOIN stock s ON ii.stock_id = s.id "
+                        + "WHERE MONTH(i.date) = %d AND YEAR(i.date) = %d "
+                        + "GROUP BY DAY(i.date) ORDER BY DAY(i.date)",
+                today.getMonthValue(), today.getYear()
+        );
+        try (ResultSet rs = DatabaseConnection.executeSearch(query)) {
             while (rs.next()) {
                 int day = rs.getInt("day");
                 double totalSales = rs.getDouble("total_sales");
-                double totalProfit = rs.getDouble("total_profit"); // Get profit
+                double totalProfit = rs.getDouble("total_profit");
                 salesMap.put(day, totalSales);
-                profitMap.put(day, totalProfit); // Put profit into map
+                profitMap.put(day, totalProfit);
             }
-            rs.close();
-
-            TimeSeries salesSeries = new TimeSeries("Daily Sales"); // Renamed for clarity
-            TimeSeries profitSeries = new TimeSeries("Daily Profit"); // New TimeSeries for profit
-
-            for (int day = 1; day <= daysInMonth; day++) {
-                salesSeries.add(new Day(day, today.getMonthValue(), today.getYear()), salesMap.get(day));
-                profitSeries.add(new Day(day, today.getMonthValue(), today.getYear()), profitMap.get(day)); // Add profit data
-            }
-
-            TimeSeriesCollection dataset = new TimeSeriesCollection();
-            dataset.addSeries(salesSeries); // Add sales series
-            dataset.addSeries(profitSeries); // Add profit series
-
-            JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                    null,
-                    "Date",
-                    "Amount (LKR)", // Changed Y-axis label to be generic
-                    dataset,
-                    true,
-                    true,
-                    false
-            );
-
-            chart.setBackgroundPaint(Color.WHITE);
-
-            XYPlot plot = (XYPlot) chart.getPlot();
-            plot.setBackgroundPaint(Color.WHITE);
-
-            // Customize line colors and boldness
-            XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
-
-            // For "Daily Sales" line (series 0)
-            renderer.setSeriesPaint(0, Color.BLUE); // Set sales line to blue
-            renderer.setSeriesStroke(0, new BasicStroke(2.0f)); // Set sales line to bold (2.0f thickness)
-
-            // For "Daily Profit" line (series 1) - choose a contrasting color and boldness
-            renderer.setSeriesPaint(1, Color.GREEN.darker()); // Example: Darker green for profit
-            renderer.setSeriesStroke(1, new BasicStroke(1.5f)); // Slightly less bold than sales, or same if preferred
-
-            DateAxis domainAxis = (DateAxis) plot.getDomainAxis();
-            domainAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1));
-            domainAxis.setDateFormatOverride(new SimpleDateFormat("d"));
-            domainAxis.setVerticalTickLabels(true);
-
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(jPanel15.getSize());
-            jPanel15.setBackground(Color.WHITE);
-            jPanel15.removeAll();
-            jPanel15.setLayout(new java.awt.BorderLayout());
-            jPanel15.add(chartPanel, java.awt.BorderLayout.CENTER);
-            jPanel15.validate();
-            jPanel15.repaint();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
         }
+        TimeSeries salesSeries = new TimeSeries("Daily Sales");
+        TimeSeries profitSeries = new TimeSeries("Daily Profit");
+        for (int day = 1; day <= daysInMonth; day++) {
+            salesSeries.add(new Day(day, today.getMonthValue(), today.getYear()), salesMap.get(day));
+            profitSeries.add(new Day(day, today.getMonthValue(), today.getYear()), profitMap.get(day));
+        }
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(salesSeries);
+        dataset.addSeries(profitSeries);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                null,
+                "Date",
+                "Amount (LKR)",
+                dataset,
+                true,
+                true,
+                false
+        );
+        chart.setBackgroundPaint(Color.WHITE);
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
+        renderer.setSeriesPaint(0, Color.BLUE);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesPaint(1, Color.GREEN.darker());
+        renderer.setSeriesStroke(1, new BasicStroke(1.5f));
+        DateAxis domainAxis = (DateAxis) plot.getDomainAxis();
+        domainAxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1));
+        domainAxis.setDateFormatOverride(new SimpleDateFormat("d"));
+        domainAxis.setVerticalTickLabels(true);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(jPanel15.getSize());
+        jPanel15.setBackground(Color.WHITE);
+        jPanel15.removeAll();
+        jPanel15.setLayout(new java.awt.BorderLayout());
+        jPanel15.add(chartPanel, java.awt.BorderLayout.CENTER);
+        jPanel15.validate();
+        jPanel15.repaint();
     }
 
     private void loadSalesByCategoryChart() {
@@ -152,16 +146,17 @@ public class Overview extends javax.swing.JPanel {
             GROUP BY c.category_name
             """;
 
-            ResultSet rs = com.lexso.connection.DatabaseConnection.executeSearch(query);
-
-            DefaultPieDataset dataset = new DefaultPieDataset();
-
-            while (rs.next()) {
-                String categoryName = rs.getString("category_name");
-                double totalSales = rs.getDouble("total_sales");
-                dataset.setValue(categoryName, totalSales);
+            DefaultPieDataset dataset = null;
+            try (ResultSet rs = DatabaseConnection.executeSearch(query)) {
+                dataset = new DefaultPieDataset();
+                while (rs.next()) {
+                    String categoryName = rs.getString("category_name");
+                    double totalSales = rs.getDouble("total_sales");
+                    dataset.setValue(categoryName, totalSales);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
             }
-            rs.close();
 
             JFreeChart chart = ChartFactory.createPieChart(
                     "Sales by Category", dataset, true, true, false
@@ -172,7 +167,6 @@ public class Overview extends javax.swing.JPanel {
             PiePlot plot = (PiePlot) chart.getPlot();
             plot.setBackgroundPaint(Color.WHITE);
 
-            // --- FIX IS HERE: Set the tooltip generator ---
             plot.setToolTipGenerator(new StandardPieToolTipGenerator());
 
             Color[] initialColors = new Color[]{
@@ -208,13 +202,259 @@ public class Overview extends javax.swing.JPanel {
             jPanel16.validate();
             jPanel16.repaint();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.SEVERE, "Error loading sales by category chart: " + e.getMessage(), e);
         }
     }
 
-    private void loadTodayAttendance() {
+    private void loadFastMovingItemsBarChart() {
+        ResultSet rs = null;
+        try {
+            LocalDate today = LocalDate.now();
+            int currentMonth = today.getMonthValue();
+            int currentYear = today.getYear();
 
+            String query = String.format(
+                    """
+            SELECT
+                p.name AS product_name,
+                SUM(ii.qty) AS total_quantity_sold
+            FROM
+                invoice_item ii
+            JOIN
+                invoice i ON ii.invoice_id = i.id
+            JOIN
+                stock s ON ii.stock_id = s.id
+            JOIN
+                product p ON s.product_id = p.id
+            WHERE
+                MONTH(i.date) = %d AND YEAR(i.date) = %d
+            GROUP BY
+                p.name
+            ORDER BY
+                total_quantity_sold DESC
+            LIMIT 5
+            """,
+                    currentMonth, currentYear
+            );
+
+            rs = com.lexso.connection.DatabaseConnection.executeSearch(query);
+
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            while (rs.next()) {
+                String productName = rs.getString("product_name");
+                double totalQuantitySold = rs.getDouble("total_quantity_sold");
+                dataset.addValue(totalQuantitySold, "Quantity Sold", productName);
+            }
+
+            JFreeChart chart = ChartFactory.createBarChart(
+                    null,
+                    "Product Name",
+                    "Quantity Sold",
+                    dataset,
+                    org.jfree.chart.plot.PlotOrientation.VERTICAL,
+                    true,
+                    true,
+                    false
+            );
+
+            chart.setBackgroundPaint(Color.WHITE);
+
+            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+            plot.setBackgroundPaint(Color.WHITE);
+            plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+
+            final Color[] customColors = new Color[]{
+                Color.decode("#10b981"),
+                Color.decode("#3B82F6"),
+                Color.decode("#F59E0B"),
+                Color.decode("#EF4444"),
+                Color.decode("#8B5CF6")
+            };
+
+            BarRenderer renderer = new BarRenderer() {
+                @Override
+                public Paint getItemPaint(int row, int column) {
+                    return customColors[column % customColors.length];
+                }
+            };
+
+            plot.setRenderer(renderer);
+
+            renderer.setMaximumBarWidth(0.10);
+
+            CategoryAxis domainAxis = plot.getDomainAxis();
+            domainAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+
+            renderer.setDefaultToolTipGenerator(new StandardCategoryToolTipGenerator(
+                    "{0}: {1} = {2}",
+                    new DecimalFormat("#,##0.00")
+            ));
+
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new java.awt.Dimension(180, 230));
+
+            jPanel19.setBackground(Color.WHITE);
+            jPanel19.setLayout(new java.awt.BorderLayout());
+            jPanel19.removeAll();
+            jPanel19.add(chartPanel, java.awt.BorderLayout.CENTER);
+            jPanel19.validate();
+            jPanel19.repaint();
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error loading fast moving items bar chart: " + e.getMessage(), e);
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadFastMovingItemsBarChart: " + ex.getMessage(), ex);
+                }
+            }
+        }
+    }
+
+    private void loadTotalProductCount() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT COUNT(id) AS total_products FROM product WHERE status = 'active'";
+            rs = DatabaseConnection.executeSearch(sql);
+            if (rs.next()) {
+                int totalProducts = rs.getInt("total_products");
+                jLabel3.setText(String.valueOf(totalProducts));
+            } else {
+                jLabel3.setText("0");
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading total product count: " + ex.getMessage(), ex);
+            jLabel3.setText("Error");
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadTotalProductCount: " + ex.getMessage(), ex);
+                }
+            }
+        }
+    }
+
+    private void loadLowStockItemsCount() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT COUNT(DISTINCT product_id) AS low_stock_count FROM stock WHERE qty <= low_stock_warning";
+            rs = DatabaseConnection.executeSearch(sql);
+            if (rs.next()) {
+                int lowStockCount = rs.getInt("low_stock_count");
+                jLabel6.setText(String.valueOf(lowStockCount));
+            } else {
+                jLabel6.setText("0");
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading low stock items count: " + ex.getMessage(), ex);
+            jLabel6.setText("Error");
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadLowStockItemsCount: " + ex.getMessage(), ex);
+                }
+            }
+        }
+    }
+
+    private void loadTotalSales30days() {
+        ResultSet rs = null;
+        try {
+            LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
+            String dateString = thirtyDaysAgo.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            String sql = "SELECT SUM(paid_amount) AS total_sales FROM invoice WHERE DATE(date) >= '" + dateString + "'";
+            rs = DatabaseConnection.executeSearch(sql);
+            if (rs.next()) {
+                double totalSales = rs.getDouble("total_sales");
+                jLabel12.setText(String.format("%,.2f", totalSales));
+            } else {
+                jLabel12.setText("0.00");
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading total sales for last 30 days: " + ex.getMessage(), ex);
+            jLabel12.setText("Error");
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadTotalSales30days: " + ex.getMessage(), ex);
+                }
+            }
+        }
+    }
+
+    private void loadTodayProfit() {
+        ResultSet rs = null;
+        try {
+            String todayDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+            String sql = "SELECT SUM(ii.qty * s.selling_price) - SUM(ii.qty * s.buying_price) AS today_profit "
+                    + "FROM invoice_item ii JOIN stock s ON ii.stock_id = s.id JOIN invoice i ON ii.invoice_id = i.id "
+                    + "WHERE DATE(i.date) = '" + todayDate + "'";
+            rs = DatabaseConnection.executeSearch(sql);
+            if (rs.next()) {
+                double todayProfit = rs.getDouble("today_profit");
+                jLabel9.setText(String.format("%,.2f", todayProfit));
+            } else {
+                jLabel9.setText("0.00");
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading today's profit: " + ex.getMessage(), ex);
+            jLabel9.setText("Error");
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadTodayProfit: " + ex.getMessage(), ex);
+                }
+            }
+        }
+    }
+
+    private void loadAvgOrderValueCount() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT AVG(paid_amount) AS avg_order_value FROM invoice";
+            rs = DatabaseConnection.executeSearch(sql);
+            if (rs.next()) {
+                double avgOrderValue = rs.getDouble("avg_order_value");
+                jLabel38.setText(String.format("%,.2f", avgOrderValue));
+            } else {
+                jLabel38.setText("0.00");
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading average order value: " + ex.getMessage(), ex);
+            jLabel38.setText("Error");
+        } catch (Exception ex) {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    LOGGER.log(Level.SEVERE, "Error closing ResultSet in loadAvgOrderValueCount: " + ex.getMessage(), ex);
+                }
+            }
+        }
     }
 
     /**
@@ -293,7 +533,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Total Products  ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("00");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -327,7 +567,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Low Stock Items");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("00");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -341,7 +581,7 @@ public class Overview extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,7 +601,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Today Profit");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -375,7 +615,7 @@ public class Overview extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +635,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Total Sales (30 days)");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setText("00");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -462,11 +702,11 @@ public class Overview extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addGap(30, 30, 30))
+                .addGap(20, 20, 20))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,11 +730,11 @@ public class Overview extends javax.swing.JPanel {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,7 +999,7 @@ public class Overview extends javax.swing.JPanel {
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel37.setText("Avg Order Value");
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel38.setText("00");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -791,13 +1031,13 @@ public class Overview extends javax.swing.JPanel {
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel39.setText("Today Attendance");
+        jLabel39.setText("Top 5 Fast-Moving Items (Current Month)");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -809,11 +1049,13 @@ public class Overview extends javax.swing.JPanel {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel39)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,28 +1074,29 @@ public class Overview extends javax.swing.JPanel {
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
