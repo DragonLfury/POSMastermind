@@ -1,6 +1,7 @@
 package com.lexso.dashboard.main;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -18,7 +19,7 @@ import javax.swing.Timer;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
 import com.lexso.dashboard.Overview;
-import com.lexso.employee.EmployeePanel;
+import com.lexso.users.management.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.users.settings.SettingsPanel;

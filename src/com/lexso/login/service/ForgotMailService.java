@@ -1,6 +1,5 @@
 package com.lexso.login.service;
 
-import com.lexso.login.main.ForgotPassword;
 import static com.lexso.login.main.ForgotPassword.LOGGER;
 import java.util.Date;
 import java.util.Properties;

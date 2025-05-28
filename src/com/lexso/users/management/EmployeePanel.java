@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.lexso.employee;
+package com.lexso.users.management;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import static com.lexso.login.main.Main.LOGGER;
@@ -27,13 +27,13 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void loadSVGIcons() {
 
-        FlatSVGIcon listIcon = new FlatSVGIcon("com/lexso/employee/icon/employeelist.svg", jLabel5.getWidth() - 90, jLabel5.getHeight() - 20);
+        FlatSVGIcon listIcon = new FlatSVGIcon("com/lexso/users/icon/employeelist.svg", jLabel5.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel5.setIcon(listIcon);
-        FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/employee/icon/attendance.svg", jLabel6.getWidth() - 90, jLabel5.getHeight() - 20);
+        FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/users/icon/attendance.svg", jLabel6.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel6.setIcon(attendanceIcon);
-        FlatSVGIcon newIcon = new FlatSVGIcon("com/lexso/employee/icon/banklist.svg", jLabel7.getWidth() - 90, jLabel5.getHeight() - 20);
+        FlatSVGIcon newIcon = new FlatSVGIcon("com/lexso/users/icon/banklist.svg", jLabel7.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel7.setIcon(newIcon);
-        FlatSVGIcon shiftIcon = new FlatSVGIcon("com/lexso/employee/icon/shiftmanage.svg", jLabel8.getWidth() - 90, jLabel5.getHeight() - 20);
+        FlatSVGIcon shiftIcon = new FlatSVGIcon("com/lexso/users/icon/shiftmanage.svg", jLabel8.getWidth() - 90, jLabel5.getHeight() - 20);
         jLabel8.setIcon(shiftIcon);
     }
 
