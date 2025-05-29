@@ -1326,3 +1326,67 @@ May 29, 2025 1:50:57 AM com.lexso.dashboard.Overview <init>
 INFO: Overview panel initialized and charts/data loaded.
 May 29, 2025 1:50:57 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 3:22:35 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 3:22:35 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 3:22:37 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 3:22:37 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 3:22:48 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+May 29, 2025 3:22:52 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+May 29, 2025 3:22:56 PM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+May 29, 2025 3:22:56 PM com.lexso.users.management.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+May 29, 2025 3:22:56 PM com.lexso.users.management.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+May 29, 2025 3:22:56 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+May 29, 2025 3:22:59 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 3:22:59 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 7:59:55 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 7:59:55 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 7:59:57 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 7:59:57 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 8:00:47 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 8:00:47 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 8:00:48 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 8:00:48 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 9:09:13 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 9:09:13 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 9:09:15 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 9:09:15 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 9:09:51 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 9:09:52 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 9:09:53 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 9:09:53 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+May 29, 2025 9:10:45 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+May 29, 2025 9:10:45 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+May 29, 2025 9:10:46 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+May 29, 2025 9:10:46 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.

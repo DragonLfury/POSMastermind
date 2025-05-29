@@ -69,6 +69,14 @@ public class DashboardWindow extends javax.swing.JFrame {
         loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
     }
 
+    public void loadPanel(JPanel panelToLoad, String logMessage) {
+        jPanel11.removeAll();
+        jPanel11.add(panelToLoad, java.awt.BorderLayout.CENTER);
+        jPanel11.revalidate();
+        jPanel11.repaint();
+        LOGGER.info(logMessage);
+    }
+    
     public void displayUserData() {
         jLabel2.setText(loggedInUsername);
         jLabel3.setText(loggedInEmail);
@@ -1044,7 +1052,6 @@ public class DashboardWindow extends javax.swing.JFrame {
             LOGGER.info("Dashboard UI refreshed successfully on refresh label click.");
 
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.severe("Error refreshing dashboard UI: " + e.getMessage());
         }
     }//GEN-LAST:event_refreshLabelMouseClicked
@@ -1104,13 +1111,6 @@ public class DashboardWindow extends javax.swing.JFrame {
         currentlySelectedPanel = jPanel8;
     }//GEN-LAST:event_jPanel8MouseClicked
 
-    private void loadPanel(JPanel panelToLoad, String logMessage) {
-        jPanel11.removeAll();
-        jPanel11.add(panelToLoad, java.awt.BorderLayout.CENTER);
-        jPanel11.revalidate();
-        jPanel11.repaint();
-        LOGGER.info(logMessage);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

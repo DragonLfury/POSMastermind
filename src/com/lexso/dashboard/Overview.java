@@ -5,7 +5,10 @@
 package com.lexso.dashboard;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.lexso.backup.BackupWindow;
 import com.lexso.connection.DatabaseConnection;
+import com.lexso.contacts.ContactPanel;
+import com.lexso.dashboard.main.DashboardWindow;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;
@@ -492,7 +495,7 @@ public class Overview extends javax.swing.JPanel {
 
             javax.swing.JLabel[] nameLabels = {jLabel30, jLabel31, jLabel32};
             javax.swing.JLabel[] pointLabels = {jLabel33, jLabel34, jLabel35};
-            
+
             int i = 0;
             while (rs.next() && i < 3) {
                 String firstName = rs.getString("first_name");
@@ -927,6 +930,12 @@ public class Overview extends javax.swing.JPanel {
         jLabel18.setText("Quick Actions");
 
         jPanel11.setBackground(new java.awt.Color(204, 229, 255));
+        jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1014,6 +1023,11 @@ public class Overview extends javax.swing.JPanel {
         );
 
         jPanel14.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel14MouseClicked(evt);
+            }
+        });
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1204,6 +1218,16 @@ public class Overview extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        BackupWindow backupWindow = new BackupWindow();
+        backupWindow.setVisible(true);
+    }//GEN-LAST:event_jPanel11MouseClicked
+
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+        DashboardWindow dashboardWindow = new DashboardWindow();
+        dashboardWindow.loadPanel(new ContactPanel(), "OverviewPanel loaded successfully into jPanel11.");
+    }//GEN-LAST:event_jPanel14MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
