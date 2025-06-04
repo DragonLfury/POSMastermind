@@ -9,6 +9,7 @@ import com.lexso.backup.BackupWindow;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
 import com.lexso.dashboard.main.DashboardWindow;
+import com.lexso.inventory.products.addproduct.AddProduct;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;
@@ -965,6 +966,12 @@ public class Overview extends javax.swing.JPanel {
         );
 
         jPanel12.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel12MouseClicked(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -994,6 +1001,7 @@ public class Overview extends javax.swing.JPanel {
         );
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1023,6 +1031,7 @@ public class Overview extends javax.swing.JPanel {
         );
 
         jPanel14.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel14MouseClicked(evt);
@@ -1228,6 +1237,11 @@ public class Overview extends javax.swing.JPanel {
         DashboardWindow dashboardWindow = new DashboardWindow();
         dashboardWindow.loadPanel(new ContactPanel(), "OverviewPanel loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        AddProduct addProduct = new AddProduct();
+        addProduct.setVisible(true);
+    }//GEN-LAST:event_jPanel12MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
