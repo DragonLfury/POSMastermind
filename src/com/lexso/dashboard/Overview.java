@@ -9,7 +9,7 @@ import com.lexso.backup.BackupWindow;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
 import com.lexso.dashboard.main.DashboardWindow;
-import com.lexso.inventory.products.addproduct.AddProduct;
+import com.lexso.inventory.AddProduct;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;
@@ -42,6 +42,7 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import static com.lexso.login.main.Main.LOGGER;
+import com.lexso.sales.main.Main;
 import static com.lexso.util.PanelRounderUtility.applyRoundedCorners;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -1002,6 +1003,11 @@ public class Overview extends javax.swing.JPanel {
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 255));
         jPanel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel13MouseClicked(evt);
+            }
+        });
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1242,6 +1248,11 @@ public class Overview extends javax.swing.JPanel {
         AddProduct addProduct = new AddProduct();
         addProduct.setVisible(true);
     }//GEN-LAST:event_jPanel12MouseClicked
+
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+        Main salesInterface = new Main();
+        salesInterface.setVisible(true);
+    }//GEN-LAST:event_jPanel13MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

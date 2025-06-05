@@ -247,7 +247,7 @@ public class BackupWindow extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(0, 51, 255));
         jButton6.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Backup");
+        jButton6.setText("Restore");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
