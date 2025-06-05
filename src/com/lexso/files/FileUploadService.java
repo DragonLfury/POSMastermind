@@ -80,18 +80,18 @@ public class FileUploadService {
         }
     }
 
-    public static void main(String[] args) {
-        FileUploadService service = new FileUploadService();
-        try {
-            // Replace with the actual path to your file.
-            String filePath = "path/to/your/file.jpg";
-            //String filePath = "path/to/your/file.pdf";
-
-            String response = service.uploadFile(filePath);
-            System.out.println("Server Response: " + response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        FileUploadService service = new FileUploadService();
+//        try {
+//            // Replace with the actual path to your file.
+//            String filePath = "path/to/your/file.jpg";
+//            //String filePath = "path/to/your/file.pdf";
+//
+//            String response = service.uploadFile(filePath);
+//            System.out.println("Server Response: " + response);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 
