@@ -1336,7 +1336,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel64">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Users"/>
+                    <Property name="text" type="java.lang.String" value="Reciept"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel65">
