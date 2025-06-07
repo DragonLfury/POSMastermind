@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
+import com.lexso.customers.Customer;
 import com.lexso.dashboard.Overview;
 import com.lexso.inventory.ProductAndCategory;
 import com.lexso.users.management.EmployeePanel;
@@ -1136,6 +1137,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel6.setBackground(selectedColor);
         currentlySelectedPanel = jPanel6;
+        loadPanel(new Customer(), "Customer loaded successfully into jPanel11.");       
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked

@@ -7,6 +7,7 @@ package com.lexso.sales;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.lexso.connection.DatabaseConnection;
+import com.lexso.customers.Customer;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -66,6 +67,11 @@ public class Main extends javax.swing.JFrame {
         jButton4.setEnabled(false);
         jButton33.setEnabled(false);
         jButton6.setEnabled(false);
+        // Initialize for unknown customer by default
+        setCustomerMobile("0000000000");
+        setCustomerName("Unknown Customer");
+        setAvailablePoints("0");
+        jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfTab("Loyality Points"), false); // Disable loyalty points tab by default
     }
 
     private void loadSVG() {
@@ -89,8 +95,10 @@ public class Main extends javax.swing.JFrame {
             vector.add(invoiceItem.getSellingPrice());
             vector.add(invoiceItem.getDiscount());
 
-            double itemTotal = Double.parseDouble(invoiceItem.getQty()) * Double.parseDouble(invoiceItem.getSellingPrice());
-            double itemDiscount = calculateItemDiscount(invoiceItem.getDiscount(), itemTotal);
+            double qty = Double.parseDouble(invoiceItem.getQty());
+            double pricePerUnit = Double.parseDouble(invoiceItem.getSellingPrice());
+            double itemTotal = qty * pricePerUnit;
+            double itemDiscount = calculateItemDiscount(invoiceItem.getDiscount(), itemTotal, qty);
             totalItemDiscounts += itemDiscount; // Accumulate item discounts
 
             double finalItemTotal = itemTotal - itemDiscount;
@@ -105,7 +113,7 @@ public class Main extends javax.swing.JFrame {
         updatePaymentButtonsState();
     }
 
-    private double calculateItemDiscount(String discountString, double itemTotal) {
+    private double calculateItemDiscount(String discountString, double itemTotal, double quantity) {
         if (discountString == null || discountString.trim().isEmpty()) {
             return 0.0;
         }
@@ -114,13 +122,14 @@ public class Main extends javax.swing.JFrame {
 
         try {
             if (discountString.endsWith("%")) {
-                // Percentage discount
+                // Percentage discount, applied per unit and scaled by quantity
                 double percent = Double.parseDouble(discountString.replace("%", "").trim());
-                return itemTotal * (percent / 100);
+                double discountPerUnit = (Double.parseDouble(invoiceItemMap.get(stock_id.getText()).getSellingPrice()) * (percent / 100));
+                return discountPerUnit * quantity;
             } else {
-                // Fixed amount discount
-                discountString = discountString.replaceAll("[^0-9.]", "");
-                return Double.parseDouble(discountString);
+                // Fixed amount discount, applied per unit and scaled by quantity
+                double fixedDiscount = Double.parseDouble(discountString.replaceAll("[^0-9.]", ""));
+                return fixedDiscount * quantity;
             }
         } catch (NumberFormatException e) {
             return 0.0;
@@ -217,6 +226,16 @@ public class Main extends javax.swing.JFrame {
         getCustomerMobile().revalidate();
         getCustomerMobile().repaint();
         System.out.println("Customer Mobile: " + customerMobile);
+
+        // Enable or disable loyalty points tab based on customer status
+        if (customerMobile.equals("0000000000")) {
+            jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfTab("Loyality Points"), false);
+            jFormattedTextField7.setText("0");
+            jFormattedTextField8.setText("");
+            jButton6.setEnabled(false);
+        } else {
+            jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfTab("Loyality Points"), true);
+        }
     }
 
     public void setAvailablePoints(String AvailablePoints) {
@@ -594,6 +613,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    
     private void updateBalance() {
         if (balance == 0) {
             balanceField.setText("0");
@@ -603,8 +623,15 @@ public class Main extends javax.swing.JFrame {
             double remainingBalance = balance;
             pointsToAdd = 0;
 
-            // Check if there's any amount that can be converted to points (for any balance amount)
-            if (balance > 0) {
+            // Check if customer is "UNKNOWN"
+            if (customerMobile.equals("0000000000")) {
+                // For unknown customers, return the entire balance as cash
+                balanceField.setText(String.valueOf(remainingBalance));
+                JOptionPane.showMessageDialog(this,
+                        "Customer balance: " + remainingBalance + "\n"
+                        + "Please return this amount to the customer.");
+            } else {
+                // For registered customers, check if there's any amount that can be converted to points
                 double fractionalPart = balance; // For amounts < 10, consider the whole amount
 
                 if (balance >= 10) {
@@ -627,18 +654,17 @@ public class Main extends javax.swing.JFrame {
                                 fractionalPart + " points will be added to customer's account when invoice is finalized.\n"
                                 + remainingBalance + " will be given as cash balance.");
                     }
-
                 }
-            }
 
-            // Update the balance field with the remaining balance to be given to customer
-            balanceField.setText(String.valueOf(remainingBalance));
+                // Update the balance field with the remaining balance to be given to customer
+                balanceField.setText(String.valueOf(remainingBalance));
 
-            // Show the remaining balance to be given to customer
-            if (remainingBalance > 0) {
-                JOptionPane.showMessageDialog(this,
-                        "Customer balance: " + remainingBalance + "\n"
-                        + "Please return this amount to the customer.");
+                // Show the remaining balance to be given to customer
+                if (remainingBalance > 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Customer balance: " + remainingBalance + "\n"
+                            + "Please return this amount to the customer.");
+                }
             }
 
             jButton3.setEnabled(true);
@@ -650,8 +676,8 @@ public class Main extends javax.swing.JFrame {
 
     private void completeSale() {
         if (balance >= 0) {
-            
-           resetFields();
+
+            resetFields();
         } else {
             JOptionPane.showMessageDialog(this, "Please complete the payment before finalizing the sale. ⚠️");
         }
@@ -670,9 +696,9 @@ public class Main extends javax.swing.JFrame {
         //Validate part
         paymentMade = false;
         //customerpanel
-        jTextField1.setText("Customer Name Here");
-        jTextField3.setText("");
-        jTextField2.setText("");
+        jTextField1.setText("Unknown Customer");
+        jTextField3.setText("0000000000");
+        jTextField2.setText("0");
         //stockpanel
         stock_id.setText("");
         jFormattedTextField1.setText("");
@@ -700,7 +726,7 @@ public class Main extends javax.swing.JFrame {
         //CARD
         jFormattedTextField3.setText("");
         //POINTS
-        jFormattedTextField7.setText("");
+        jFormattedTextField7.setText("0");
         jFormattedTextField8.setText("");
         //total and balance
         totalField.setText("0");
@@ -713,8 +739,9 @@ public class Main extends javax.swing.JFrame {
         cashField.setText("0");
         // Reset discount ID
         selectedDiscountId = null;
-        // Disable payment buttons
+        // Disable payment buttons and loyalty points tab
         updatePaymentButtonsState();
+        jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfTab("Loyality Points"), false);
 
     }
 
@@ -1509,7 +1536,11 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setText("Customer Details ");
 
         jTextField1.setEditable(false);
-        jTextField1.setText("Customer Name Here");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Points : ");
@@ -1821,13 +1852,20 @@ public class Main extends javax.swing.JFrame {
         }
 
         System.out.println("Button Clicked");
-        customer customerPanel = new customer();
+        Customer customerPanel = new Customer();
         customerPanel.setInvoice(this);
         JDialog frame = new JDialog(this, true);
         frame.add(customerPanel);
         frame.setSize(1030, 766);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        // If no customer is selected (e.g., dialog closed without selection), reset to unknown
+        if (customerMobile == null || customerMobile.isEmpty()) {
+            setCustomerMobile("0000000000");
+            setCustomerName("Unknown Customer");
+            setAvailablePoints("0");
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1921,7 +1959,7 @@ public class Main extends javax.swing.JFrame {
             params.put("Parameter2", thankNote);
             params.put("Parameter3", String.valueOf(invoiceID));
             params.put("Parameter4", String.valueOf(employeeEmail));
-            params.put("Parameter5", String.valueOf(customerMobile));
+//            params.put("Parameter5", String.valueOf(customerMobile));
             params.put("Parameter6", String.valueOf(dateTime));
             params.put("Parameter7", String.valueOf(finalTotalDiscount));
             params.put("Parameter8", String.valueOf(paidAmount));
@@ -2042,6 +2080,10 @@ public class Main extends javax.swing.JFrame {
         //  refresh btn
         resetFields();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
