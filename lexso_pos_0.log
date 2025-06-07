@@ -1246,3 +1246,19 @@ Jun 07, 2025 1:03:56 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: EmployeePanel loaded successfully into jPanel11.
 Jun 07, 2025 1:04:02 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 07, 2025 11:02:09 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 07, 2025 11:02:09 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 07, 2025 11:02:10 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 07, 2025 11:02:10 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 07, 2025 2:36:44 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 07, 2025 2:36:44 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 07, 2025 2:36:46 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 07, 2025 2:36:46 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.

@@ -7,7 +7,7 @@ package com.lexso.sales;
 import com.lexso.connection.DatabaseConnection;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
-import src.*;
+import com.lexso.util.*;
 import javax.swing.JDialog;
 import javax.swing.*;
 import java.util.Vector;
