@@ -6,6 +6,7 @@ package com.lexso.users.management;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import static com.lexso.login.main.Main.LOGGER;
+import com.lexso.settings.DailyAttendance;
 import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.users.details.AllUsersWindow;
 
@@ -322,7 +323,8 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newEmployeejPanelMouseClicked
 
     private void attendancejPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendancejPanelMouseClicked
-        // TODO add your handling code here:
+        DailyAttendance dailyAttendance = new DailyAttendance();
+        dailyAttendance.setVisible(true);
     }//GEN-LAST:event_attendancejPanelMouseClicked
 
     private void shiftManagementjPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shiftManagementjPanelMouseClicked

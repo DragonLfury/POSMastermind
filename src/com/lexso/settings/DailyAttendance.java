@@ -5,6 +5,15 @@
 package com.lexso.settings;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.lexso.connection.DatabaseConnection;
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +26,83 @@ public class DailyAttendance extends javax.swing.JFrame {
      */
     public DailyAttendance() {
         initComponents();
+        loadAttendance();
+        jDateChooser1.setDate(new Date());
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    loadAttendance();
+                }
+            }
+        });
+    }
+
+    private void loadAttendance() {
+        
+        try {
+            Date selectedDate = jDateChooser1.getDate();
+            String dateString = null;
+            if (selectedDate != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dateString = sdf.format(selectedDate);
+            } else {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dateString = sdf.format(new Date());
+                jDateChooser1.setDate(new Date()); }
+
+            String attendanceQuery = "SELECT * FROM `attendance` WHERE `date` = '" + dateString + "'";
+            ResultSet resultSet = DatabaseConnection.executeSearch(attendanceQuery);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            while (resultSet.next()) {
+                Vector<String> vector = new Vector<>();
+                vector.add(resultSet.getString("attendance_id"));
+                vector.add(resultSet.getString("user_email"));
+                vector.add(resultSet.getString("check_in"));
+                vector.add(resultSet.getString("check_out"));
+                vector.add(resultSet.getString("date"));
+                vector.add(resultSet.getString("status"));
+                vector.add(resultSet.getString("shift_id"));
+                model.addRow(vector);
+            }
+            
+            updateSummaryStatistics(dateString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    private void updateSummaryStatistics(String date) throws Exception {
+        
+        try {
+            Map<String, Integer> statusCounts = new HashMap<>();
+            statusCounts.put("Present", 0);
+            statusCounts.put("Absent", 0);
+            statusCounts.put("Working", 0);
+            statusCounts.put("On Leave", 0); 
+            
+            String query = "SELECT `status`, COUNT(*) AS count FROM `attendance` WHERE `date` = '" + date + "' GROUP BY `status`";
+            ResultSet rs = DatabaseConnection.executeSearch(query);
+
+            while (rs.next()) {
+                String status = rs.getString("status");
+                int count = rs.getInt("count");
+                statusCounts.put(status, count);
+            }
+
+            jLabel16.setText(String.valueOf(statusCounts.get("Present")));
+            jLabel18.setText(String.valueOf(statusCounts.get("Absent")));
+            jLabel20.setText(String.valueOf(statusCounts.get("Working")));
+            jLabel22.setText(String.valueOf(statusCounts.get("On Leave"))); 
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     /**
@@ -52,7 +138,8 @@ public class DailyAttendance extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 

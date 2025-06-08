@@ -473,8 +473,8 @@ public class Overview extends javax.swing.JPanel {
         backupIconjLabel.setIcon(backupIcon);
         FlatSVGIcon posIcon = new FlatSVGIcon("com/lexso/dashboard/icon/pos_overview.svg", 40, 40);
         POSSystemIconjLabel.setIcon(posIcon);
-        FlatSVGIcon helpIcon = new FlatSVGIcon("com/lexso/dashboard/icon/help_overview.svg", 40, 40);
-        helpIconjLabel.setIcon(helpIcon);
+        FlatSVGIcon grnIcon = new FlatSVGIcon("com/lexso/dashboard/icon/GRN.svg", 40, 40);
+        grnIconjLabel.setIcon(grnIcon);
         FlatSVGIcon warningIcon = new FlatSVGIcon("com/lexso/dashboard/icon/warning.svg", 40, 40);
         lowStockItemsIconjLabel.setIcon(warningIcon);
         FlatSVGIcon productIcon = new FlatSVGIcon("com/lexso/dashboard/icon/product.svg", 40, 40);
@@ -595,7 +595,7 @@ public class Overview extends javax.swing.JPanel {
         POSSystemIconjLabel = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        helpIconjLabel = new javax.swing.JLabel();
+        grnIconjLabel = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         avgOrderIconjLabel = new javax.swing.JLabel();
@@ -1045,7 +1045,7 @@ public class Overview extends javax.swing.JPanel {
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("Help Center");
+        jLabel25.setText("GRN");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1053,7 +1053,7 @@ public class Overview extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(helpIconjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(grnIconjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1064,7 +1064,7 @@ public class Overview extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(helpIconjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(grnIconjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel25)
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -1260,7 +1260,7 @@ public class Overview extends javax.swing.JPanel {
     private javax.swing.JLabel TotalProfitIconjLabel;
     private javax.swing.JLabel avgOrderIconjLabel;
     private javax.swing.JLabel backupIconjLabel;
-    private javax.swing.JLabel helpIconjLabel;
+    private javax.swing.JLabel grnIconjLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

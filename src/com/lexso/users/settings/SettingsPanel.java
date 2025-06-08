@@ -235,7 +235,18 @@ public class SettingsPanel extends javax.swing.JPanel {
         FlatSVGIcon removeImage = new FlatSVGIcon("com/lexso/users/icon/remove.svg", 20, 20);
         jButton5.setIcon(removeImage);
         jButton9.setIcon(removeImage);
+        
+        FlatSVGIcon reciptIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Recipt_Icon.svg", 25, 20);
+        jLabel65.setIcon(reciptIcon);
 
+        FlatSVGIcon bankIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Bank_Icon.svg", 25, 20);
+        jLabel63.setIcon(bankIcon);
+
+        FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Atendance_Icon.svg", 25, 20);
+        jLabel68.setIcon(attendanceIcon);
+
+        FlatSVGIcon supplierIocn = new FlatSVGIcon("com/lexso/users/icon/Setting_Supplier_Icon.svg", 25, 20);
+        jLabel70.setIcon(supplierIocn);
     }
 
     private void loadDetails() {
@@ -1330,15 +1341,16 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel66.setText("Location");
 
+        jLabel67.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel67.setText("jLabel55");
+        jLabel67.setText("Attendance");
 
         jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel68.setToolTipText("Bank Accounts");
         jLabel68.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel69.setText("jLabel55");
+        jLabel69.setText("Supplier");
 
         jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel70.setToolTipText("Bank Accounts");
@@ -1358,7 +1370,6 @@ public class SettingsPanel extends javax.swing.JPanel {
             adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel71, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1370,6 +1381,9 @@ public class SettingsPanel extends javax.swing.JPanel {
                     .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(adminProPanelLayout.createSequentialGroup()
+                .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         adminProPanelLayout.setVerticalGroup(
             adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

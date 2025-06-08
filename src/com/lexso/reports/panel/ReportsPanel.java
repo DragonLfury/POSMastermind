@@ -1,7 +1,6 @@
 package com.lexso.reports.panel;
 
-import com.lexso.dashboard.main.DashboardWindow;
-import com.lexso.login.main.Main;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.reports.DailySales_Report;
 import com.lexso.reports.Inventory_Report;
 import com.lexso.reports.MonthlySales_Report;
@@ -9,18 +8,39 @@ import com.lexso.reports.ProductMovement_Report;
 import com.lexso.reports.Profit_Report;
 import com.lexso.reports.UserWiseSales_Report;
 
-
-
 /**
  *
  * @author Norlan
  */
 public class ReportsPanel extends javax.swing.JPanel {
-    
+
     public ReportsPanel() {
         initComponents();
+        loadSVG();
     }
-    
+
+    private void loadSVG() {
+
+        FlatSVGIcon salesReportIcon = new FlatSVGIcon("com/lexso/reports/icon/Sales Report Icon.svg", 40, 40);
+        jLabel5.setIcon(salesReportIcon);
+
+        FlatSVGIcon inventoryReportIcon = new FlatSVGIcon("com/lexso/reports/icon/Inventory Report Icon.svg", 40, 40);
+        jLabel23.setIcon(inventoryReportIcon);
+
+        FlatSVGIcon productMovementReportIcon = new FlatSVGIcon("com/lexso/reports/icon/Moving Product Report Icon.svg", 40, 40);
+        jLabel26.setIcon(productMovementReportIcon);
+
+        FlatSVGIcon monthlySalesReport = new FlatSVGIcon("com/lexso/reports/icon/Monthly Sales Report Icon.svg", 40, 40);
+        jLabel6.setIcon(monthlySalesReport);
+
+        FlatSVGIcon userWiseSalesReportIcon = new FlatSVGIcon("com/lexso/reports/icon/User-Wise Sales Report Icon.svg", 40, 40);
+        jLabel29.setIcon(userWiseSalesReportIcon);
+
+        FlatSVGIcon profitReportIcon = new FlatSVGIcon("com/lexso/reports/icon/Profit Report Icon.svg", 50, 50);
+        jLabel32.setIcon(profitReportIcon);
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -438,7 +458,7 @@ public class ReportsPanel extends javax.swing.JPanel {
     private void attendancejPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendancejPanel1MouseClicked
         UserWiseSales_Report user_wise_Sales_Report = new UserWiseSales_Report();
         user_wise_Sales_Report.setVisible(true);
-        
+
     }//GEN-LAST:event_attendancejPanel1MouseClicked
 
     private void attendancejPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendancejPanel1MouseEntered
