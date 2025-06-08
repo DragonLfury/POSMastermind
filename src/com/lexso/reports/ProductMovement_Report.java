@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.lexso.reports;
 
@@ -18,22 +18,23 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author User
  */
-public class ProductMovement_Report extends javax.swing.JDialog {
+public class ProductMovement_Report extends javax.swing.JFrame {
 
     /**
      * Creates new form ProductMovement_Report
      */
-    public ProductMovement_Report(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ProductMovement_Report() {
         initComponents();
+        loadInvoices();
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     private void loadInvoices() {
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         Double total = 0.0;
@@ -80,6 +81,7 @@ public class ProductMovement_Report extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,7 +196,7 @@ public class ProductMovement_Report extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -241,7 +243,7 @@ public class ProductMovement_Report extends javax.swing.JDialog {
         String sort = String.valueOf(jComboBox1.getSelectedItem());
 
         try {
-            InputStream s = this.getClass().getResourceAsStream("/resources/Product_Movement_Report.jasper");
+            InputStream s = this.getClass().getResourceAsStream("/com/lexso/reports/resources/Product_Movement_Report.jasper");
 
             HashMap<String, Object> params = new HashMap<>();
             params.put("Parameter1", String.valueOf(date));
@@ -288,17 +290,10 @@ public class ProductMovement_Report extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ProductMovement_Report dialog = new ProductMovement_Report(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new ProductMovement_Report().setVisible(true);
             }
         });
     }

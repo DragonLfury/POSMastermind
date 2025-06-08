@@ -1,10 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.lexso.reports;
 
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.lexso.connection.DatabaseConnection;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author User
  */
-public class UserWiseSales_Report extends javax.swing.JDialog {
+public class UserWiseSales_Report extends javax.swing.JFrame {
 
     HashMap<String, Vector<String>> invoiceMap = new HashMap<>();
     private static HashMap<String, String> userMap = new HashMap<>();
@@ -33,9 +32,9 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
     /**
      * Creates new form UserWiseSales_Report
      */
-    public UserWiseSales_Report(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public UserWiseSales_Report() {
         initComponents();
+        loadEmails();
     }
 
 
@@ -60,7 +59,7 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
 
     }
 
-    public void loadInvoices() {
+    public void loadInvoice() {
 
         String userEmail = String.valueOf(jComboBox1.getSelectedItem());
         String date = String.valueOf(sdf.format(jDateChooser1.getDate()));
@@ -143,7 +142,7 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
         jComboBox1.setSelectedIndex(0);
         invoiceMap.clear();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -324,7 +323,7 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Please select email and date", "Error",
                 JOptionPane.ERROR_MESSAGE);
         } else {
-            loadInvoices();
+            loadInvoice();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -347,7 +346,7 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
                 JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                InputStream s = this.getClass().getResourceAsStream("/resources/User_wise_Sales_Report  .jasper");
+                InputStream s = this.getClass().getResourceAsStream("/com/lexso/reports/resources/User_wise_Sales_Report  .jasper");
 
                 HashMap<String, Object> params = new HashMap<>();
                 params.put("Parameter1", date);
@@ -394,17 +393,10 @@ public class UserWiseSales_Report extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UserWiseSales_Report dialog = new UserWiseSales_Report(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new UserWiseSales_Report().setVisible(true);
             }
         });
     }

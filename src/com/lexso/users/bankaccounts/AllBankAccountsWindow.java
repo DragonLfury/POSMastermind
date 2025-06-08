@@ -34,24 +34,6 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
 
     private void loadSVGIcons() {
 
-        // Set colors for buttons
-        jButton1.setBackground(new Color(76, 175, 80)); // Green for Update
-        jButton1.setForeground(Color.WHITE); // White text for contrast
-        jButton1.setBorderPainted(false); // Optional: removes the border for a flatter look
-
-        jButton2.setBackground(new Color(244, 67, 54)); // Red for Delete
-        jButton2.setForeground(Color.WHITE); // White text for contrast
-        jButton2.setBorderPainted(false);
-
-        jButton3.setBackground(new Color(33, 150, 243)); // Blue for View
-        jButton3.setForeground(Color.WHITE); // White text for contrast
-        jButton3.setBorderPainted(false);
-
-        jButton4.setBackground(new Color(255, 193, 7)); // Yellow for Add
-        jButton4.setForeground(Color.BLACK); // Black text for contrast
-        jButton4.setBorderPainted(false);
-
-// Set icons
         FlatSVGIcon viewIcon = new FlatSVGIcon("com/lexso/users/icon/view.svg", jButton3.getWidth() - 90, jButton3.getHeight() - 20);
         jButton3.setIcon(viewIcon);
 
@@ -141,7 +123,9 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jButton1.setBackground(new java.awt.Color(76, 175, 80));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +133,9 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(244, 67, 54));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Delete");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +143,9 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(33, 150, 243));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("View");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +153,7 @@ public class AllBankAccountsWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 193, 7));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setText("Add");
         jButton4.addActionListener(new java.awt.event.ActionListener() {

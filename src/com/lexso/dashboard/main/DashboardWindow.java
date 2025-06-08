@@ -24,6 +24,7 @@ import com.lexso.inventory.ProductAndCategory;
 import com.lexso.users.management.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
+import com.lexso.reports.panel.ReportsPanel;
 import com.lexso.users.settings.SettingsPanel;
 import com.lexso.util.CurrentUser;
 import java.util.prefs.Preferences;
@@ -1161,6 +1162,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel8.setBackground(selectedColor);
         currentlySelectedPanel = jPanel8;
+        loadPanel(new ReportsPanel(), loggedInRole);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked

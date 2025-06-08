@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.lexso.reports;
 
@@ -24,29 +24,26 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author User
  */
-public class DailySales_Report extends javax.swing.JDialog {
+public class DailySales_Report extends javax.swing.JFrame {
 
     /**
      * Creates new form DailySales_Report
      */
-    public DailySales_Report(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-
-    
-    HashMap<String, Vector<String>> stockMap = new HashMap<>();
-
     public DailySales_Report() {
         initComponents();
         jFormattedTextField1.setEditable(false);
         loadInvoices();
     }
 
+    
+    HashMap<String, Vector<String>> stockMap = new HashMap<>();
+
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     private void loadInvoices() {
+        
         Double total = 0.0;
         Date chooseDate = jDateChooser1.getDate();
 
@@ -255,9 +252,8 @@ public class DailySales_Report extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFormattedTextField1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(14, 14, 14))
         );
 
@@ -358,17 +354,10 @@ public class DailySales_Report extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DailySales_Report dialog = new DailySales_Report(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new DailySales_Report().setVisible(true);
             }
         });
     }

@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.lexso.reports;
 
@@ -19,26 +19,22 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author User
  */
-public class Inventory_Report extends javax.swing.JDialog {
+public class Inventory_Report extends javax.swing.JFrame {
 
     /**
      * Creates new form Inventory_Report
      */
-    public Inventory_Report(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-
-    HashMap<String, Vector<String>> stockMap = new HashMap<>();
-
     public Inventory_Report() {
         initComponents();
         loadStock();
     }
+
+    HashMap<String, Vector<String>> stockMap = new HashMap<>();
 
     public void loadStock() {
         Double total = 0.0;
@@ -278,17 +274,10 @@ public class Inventory_Report extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Inventory_Report dialog = new Inventory_Report(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new Inventory_Report().setVisible(true);
             }
         });
     }

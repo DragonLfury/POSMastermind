@@ -73,21 +73,6 @@ public class AllUsersWindow extends javax.swing.JFrame {
     }
 
     private void loadSVGIcons() {
-        jButton1.setBackground(new Color(76, 175, 80));
-        jButton1.setForeground(Color.WHITE);
-        jButton1.setBorderPainted(false);
-
-        jButton2.setBackground(new Color(244, 67, 54));
-        jButton2.setForeground(Color.WHITE);
-        jButton2.setBorderPainted(false);
-
-        jButton3.setBackground(new Color(33, 150, 243));
-        jButton3.setForeground(Color.WHITE);
-        jButton3.setBorderPainted(false);
-
-        jButton4.setBackground(new Color(255, 193, 7));
-        jButton4.setForeground(Color.BLACK);
-        jButton4.setBorderPainted(false);
 
         FlatSVGIcon viewIcon = new FlatSVGIcon("com/lexso/users/icon/view.svg", jButton3.getWidth() - 110, jButton3.getHeight() - 20);
         jButton3.setIcon(viewIcon);
@@ -310,7 +295,9 @@ public class AllUsersWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jButton1.setBackground(new java.awt.Color(76, 175, 80));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Update");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +306,9 @@ public class AllUsersWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(244, 67, 54));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Inactive");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -328,6 +317,7 @@ public class AllUsersWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 193, 7));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jButton4.setText("Add");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -412,7 +402,9 @@ public class AllUsersWindow extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("View and manage all users registered in the system");
 
+        jButton3.setBackground(new java.awt.Color(33, 150, 243));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Show More");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
