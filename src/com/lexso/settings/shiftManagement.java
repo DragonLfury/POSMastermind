@@ -231,6 +231,7 @@ public class shiftManagement extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));
         jLabel1.setText("Shift Managment");
 
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Manage your shifting...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -249,7 +250,7 @@ public class shiftManagement extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel2))
         );
 

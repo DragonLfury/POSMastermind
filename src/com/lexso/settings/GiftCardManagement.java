@@ -154,17 +154,6 @@ public class GiftCardManagement extends javax.swing.JFrame {
         deletebtn.setBorderPainted(false);
 
         // Set icons
-//        FlatSVGIcon viewIcon = new FlatSVGIcon("/com/lexso/settings/resources/show.svg", showbtn.getWidth() - 110, showbtn.getHeight() - 30);
-//        showbtn.setIcon(viewIcon);
-//
-//        FlatSVGIcon addIcon = new FlatSVGIcon(" /add-plus-circle-svgrepo-com.svg", addbtn.getWidth() - 110, addbtn.getHeight() - 30);
-//        addbtn.setIcon(addIcon);
-//
-//        FlatSVGIcon updateIcon = new FlatSVGIcon(" /update-icon-svgrepo-com.svg", updatebtn.getWidth() - 110, updatebtn.getHeight() - 30);
-//        updatebtn.setIcon(updateIcon);
-//
-//        FlatSVGIcon deleteIcon = new FlatSVGIcon(" /delete-svgrepo-com.svg", deletebtn.getWidth() - 110, deletebtn.getHeight() - 30);
-//        deletebtn.setIcon(deleteIcon);
         FlatSVGIcon viewIcon = new FlatSVGIcon("com/lexso/users/icon/view.svg", showbtn.getWidth() - 110, showbtn.getHeight() - 20);
         showbtn.setIcon(viewIcon);
 

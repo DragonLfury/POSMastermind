@@ -8,6 +8,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.backup.BackupWindow;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
+import com.lexso.customers.Customer;
 import com.lexso.dashboard.main.DashboardWindow;
 import com.lexso.inventory.AddProduct;
 import java.awt.BasicStroke;
@@ -834,6 +835,11 @@ public class Overview extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("View All Members");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 204, 0));
@@ -1252,6 +1258,11 @@ public class Overview extends javax.swing.JPanel {
         Main salesInterface = new Main();
         salesInterface.setVisible(true);
     }//GEN-LAST:event_jPanel13MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Customer customer = new Customer();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
