@@ -6,7 +6,9 @@ package com.lexso.users.settings;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.connection.DatabaseConnection;
+import com.lexso.dashboard.main.DashboardWindow;
 import com.lexso.settings.EditableReciept;
+import com.lexso.settings.location.main.LocationMainDashboard;
 import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.util.CurrentUser;
 import java.awt.Color;
@@ -85,7 +87,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                     adminProPanel.setVisible(false);
                 }
             } else {
-                
+
             }
 
         } catch (Exception e) {
@@ -1326,7 +1328,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         });
 
         jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel66.setText("Bank AC");
+        jLabel66.setText("Location");
 
         jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel67.setText("jLabel55");
@@ -1774,8 +1776,8 @@ public class SettingsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jLabel63MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel63MouseClicked
-        AllBankAccountsWindow allBankAccountsWindow = new AllBankAccountsWindow();
-        allBankAccountsWindow.setVisible(true);
+        LocationMainDashboard locationMainDashboard = new LocationMainDashboard(new DashboardWindow(), true);
+        locationMainDashboard.setVisible(true);
     }//GEN-LAST:event_jLabel63MouseClicked
 
     private void jLabel65MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel65MouseClicked
