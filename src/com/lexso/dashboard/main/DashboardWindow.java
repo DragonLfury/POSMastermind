@@ -1,7 +1,6 @@
 package com.lexso.dashboard.main;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -20,11 +19,13 @@ import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
 import com.lexso.customers.Customer;
 import com.lexso.dashboard.Overview;
-import com.lexso.inventory.ProductAndCategory;
+import com.lexso.inventory.product.ProductAndCategory;
+import com.lexso.inventory.stock.InventoryManagementPanel;
 import com.lexso.users.management.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.reports.panel.ReportsPanel;
+import com.lexso.settings.SupplierManagement;
 import com.lexso.users.settings.SettingsPanel;
 import com.lexso.util.CurrentUser;
 import java.util.prefs.Preferences;
@@ -1043,7 +1044,7 @@ public class DashboardWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel10MouseExited
 
     private void refreshLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshLabelMouseClicked
-    com.lexso.connection.DatabaseConnection.connection = null;
+        com.lexso.connection.DatabaseConnection.connection = null;
         try {
             displayUserData();
 
@@ -1122,6 +1123,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel4.setBackground(selectedColor);
         currentlySelectedPanel = jPanel4;
+        loadPanel(new InventoryManagementPanel(), "Supplier List loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -1130,6 +1132,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel5.setBackground(selectedColor);
         currentlySelectedPanel = jPanel5;
+        loadPanel(new SupplierManagement(), "Supplier List loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
@@ -1138,7 +1141,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel6.setBackground(selectedColor);
         currentlySelectedPanel = jPanel6;
-        loadPanel(new Customer(), "Customer loaded successfully into jPanel11.");       
+        loadPanel(new Customer(), "Customer loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked

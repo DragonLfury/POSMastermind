@@ -1,4 +1,4 @@
-package com.lexso.inventory;
+package com.lexso.inventory.product;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.JOptionPane;

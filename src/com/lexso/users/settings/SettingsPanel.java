@@ -8,6 +8,8 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.dashboard.main.DashboardWindow;
 import com.lexso.settings.EditableReciept;
+import com.lexso.settings.GiftCardManagement;
+import com.lexso.settings.MarkAttendance;
 import com.lexso.settings.location.main.LocationMainDashboard;
 import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.util.CurrentUser;
@@ -1353,6 +1355,11 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel68.setToolTipText("Bank Accounts");
         jLabel68.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel68.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel68MouseClicked(evt);
+            }
+        });
 
         jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel69.setText("Supplier");
@@ -1372,6 +1379,11 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel73.setToolTipText("Bank Accounts");
         jLabel73.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel73.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel73MouseClicked(evt);
+            }
+        });
 
         jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel74.setText("Gifts");
@@ -1823,6 +1835,16 @@ public class SettingsPanel extends javax.swing.JPanel {
         EditableReciept editableReciept = new EditableReciept();
         editableReciept.setVisible(true);
     }//GEN-LAST:event_jLabel65MouseClicked
+
+    private void jLabel68MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel68MouseClicked
+        MarkAttendance markAttendance = new MarkAttendance();
+        markAttendance.setVisible(true);
+    }//GEN-LAST:event_jLabel68MouseClicked
+
+    private void jLabel73MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel73MouseClicked
+        GiftCardManagement giftCardManagement = new GiftCardManagement();
+        giftCardManagement.setVisible(true);
+    }//GEN-LAST:event_jLabel73MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

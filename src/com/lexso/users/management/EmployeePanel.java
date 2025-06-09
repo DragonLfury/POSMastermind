@@ -7,6 +7,7 @@ package com.lexso.users.management;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.settings.DailyAttendance;
+import com.lexso.settings.shiftManagement;
 import com.lexso.users.bankaccounts.AllBankAccountsWindow;
 import com.lexso.users.details.AllUsersWindow;
 
@@ -328,7 +329,8 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_attendancejPanelMouseClicked
 
     private void shiftManagementjPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shiftManagementjPanelMouseClicked
-        // TODO add your handling code here:
+        shiftManagement shiftManagement = new shiftManagement();
+        shiftManagement.setVisible(true);
     }//GEN-LAST:event_shiftManagementjPanelMouseClicked
 
 

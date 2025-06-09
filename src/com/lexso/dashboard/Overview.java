@@ -10,7 +10,7 @@ import com.lexso.connection.DatabaseConnection;
 import com.lexso.contacts.ContactPanel;
 import com.lexso.customers.Customer;
 import com.lexso.dashboard.main.DashboardWindow;
-import com.lexso.inventory.AddProduct;
+import com.lexso.inventory.product.AddProduct;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;
@@ -1261,7 +1261,8 @@ public class Overview extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Customer customer = new Customer();
-        
+        DashboardWindow dashboardWindow = new DashboardWindow();
+        dashboardWindow.loadPanel(customer, java.awt.BorderLayout.CENTER);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

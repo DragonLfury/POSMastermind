@@ -18,19 +18,20 @@ import javax.swing.JOptionPane;
  */
 public class MarkAttendance extends javax.swing.JFrame {
 
-         Map<String, Integer> shiftMap = new HashMap<>();
+    Map<String, Integer> shiftMap = new HashMap<>();
 
     public MarkAttendance() {
         initComponents();
         loadShiftIdsToComboBox(shiftBox);
     }
+
     public void reset() {
         emailField.setText("");
         String status = shiftBox.getSelectedItem().toString();
 
     }
-    
-     private void loadShiftIdsToComboBox(JComboBox<String> comboBox) {
+
+    private void loadShiftIdsToComboBox(JComboBox<String> comboBox) {
         try {
             ResultSet rs = DatabaseConnection.executeSearch("SELECT shift_id, shift_name FROM shift");
             comboBox.removeAllItems();
@@ -40,8 +41,8 @@ public class MarkAttendance extends javax.swing.JFrame {
                 String name = rs.getString("shift_name");
                 int id = rs.getInt("shift_id");
 
-                comboBox.addItem(name);      
-                shiftMap.put(name, id);      
+                comboBox.addItem(name);
+                shiftMap.put(name, id);
             }
 
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class MarkAttendance extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -235,14 +236,37 @@ public class MarkAttendance extends javax.swing.JFrame {
             try {
                 int shiftId = shiftMap.get(selectedShiftName);
 
+                // Step 1: Check if email exists in user table
+                ResultSet rsUser = DatabaseConnection.executeSearch(
+                        "SELECT email FROM user WHERE email = '" + email + "'"
+                );
+
+                if (!rsUser.next()) {
+                    JOptionPane.showMessageDialog(this, "Email not found in user records.", "Invalid Email", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // Step 2: Check if already checked in for the same shift today
+                ResultSet rsAttendance = DatabaseConnection.executeSearch(
+                        "SELECT * FROM attendance WHERE user_email = '" + email + "' "
+                        + "AND date = CURDATE() AND shift_id = " + shiftId
+                );
+
+                if (rsAttendance.next()) {
+                    JOptionPane.showMessageDialog(this, "You have already checked in for this shift today.", "Already Checked In", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // Step 3: Insert new attendance record
                 DatabaseConnection.executeIUD(
-                    "INSERT INTO attendance (user_email, check_in, date, status, shift_id) "
-                    + "VALUES ('" + email + "', NOW(), CURDATE(), '" + status + "', " + shiftId + ")"
+                        "INSERT INTO attendance (user_email, check_in, date, status, shift_id) "
+                        + "VALUES ('" + email + "', NOW(), CURDATE(), '" + status + "', " + shiftId + ")"
                 );
 
                 JOptionPane.showMessageDialog(this, "Check-In Success", "Success", JOptionPane.INFORMATION_MESSAGE);
                 reset();
                 this.dispose();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
@@ -250,7 +274,6 @@ public class MarkAttendance extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Please enter an email and select a shift!");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -261,14 +284,24 @@ public class MarkAttendance extends javax.swing.JFrame {
             try {
                 int shiftId = shiftMap.get(selectedShiftName);
 
-                DatabaseConnection.executeIUD(
-                    "UPDATE attendance SET check_out = NOW() "
-                    + "WHERE user_email = '" + email + "' AND date = CURDATE() AND shift_id = " + shiftId
+                ResultSet rs = DatabaseConnection.executeSearch(
+                        "SELECT * FROM attendance WHERE user_email = '" + email
+                        + "' AND date = CURDATE() AND shift_id = " + shiftId
                 );
 
-                JOptionPane.showMessageDialog(this, "Check-out Success", "Success", JOptionPane.INFORMATION_MESSAGE);
-                reset();
-                this.dispose();
+                if (rs.next()) {
+
+                    DatabaseConnection.executeIUD(
+                            "UPDATE attendance SET check_out = NOW() "
+                            + "WHERE user_email = '" + email + "' AND date = CURDATE() AND shift_id = " + shiftId
+                    );
+                    JOptionPane.showMessageDialog(this, "Check-out Success", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    reset();
+                    this.dispose();
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "No check-in found for this email and shift today!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
@@ -281,17 +314,17 @@ public class MarkAttendance extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        FlatMacLightLaf.setup();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MarkAttendance().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        FlatMacLightLaf.setup();
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MarkAttendance().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailField;

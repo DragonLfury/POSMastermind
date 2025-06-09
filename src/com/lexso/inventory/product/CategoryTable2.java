@@ -1,4 +1,8 @@
-package com.lexso.inventory;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
+package com.lexso.inventory.product;
 
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -6,15 +10,23 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import com.lexso.connection.DatabaseConnection;
 
-public class CategoryTable extends javax.swing.JDialog {
+/**
+ *
+ * @author hesha
+ */
+public class CategoryTable2 extends javax.swing.JDialog {
 
     private ProductAndCategory productAndCategory;
 
-    public CategoryTable(ProductAndCategory productAndCategory) {
+    /**
+     * Creates new form CategoryTable
+     */
+    public CategoryTable2(ProductAndCategory productAndCategory) {
 
         initComponents();
         loadCategoryToTable("");
-        this.productAndCategory=productAndCategory;
+        this.productAndCategory = productAndCategory;
+
     }
 
     private void loadCategoryToTable(String name) {
@@ -158,7 +170,7 @@ public class CategoryTable extends javax.swing.JDialog {
 
         if (evt.getClickCount() == 2) {
             String name = String.valueOf(jTable1.getValueAt(row, 1));
-           productAndCategory.getJField3().setText(name);
+            productAndCategory.getField3().setText(name);
             this.dispose();
         }
 
