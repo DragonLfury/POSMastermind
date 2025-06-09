@@ -5,6 +5,12 @@
 package com.lexso.settings;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.lexso.connection.DatabaseConnection;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +23,35 @@ public class LeaveManagement extends javax.swing.JFrame {
      */
     public LeaveManagement() {
         initComponents();
+        loadShiftIdsToComboBox(shiftBox);
+    }
+
+    public void reset() {
+        emailField.setText("");
+        String status = shiftBox.getSelectedItem().toString();
+
+    }
+
+    Map<String, Integer> shiftMap = new HashMap<>();
+
+    private void loadShiftIdsToComboBox(JComboBox<String> comboBox) {
+        try {
+            ResultSet rs = DatabaseConnection.executeSearch("SELECT shift_id, shift_name FROM shift");
+            comboBox.removeAllItems();
+            shiftMap.clear();
+
+            while (rs.next()) {
+                String name = rs.getString("shift_name");
+                int id = rs.getInt("shift_id");
+
+                comboBox.addItem(name);
+                shiftMap.put(name, id);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error loading shift names");
+        }
     }
 
     /**
@@ -69,7 +104,7 @@ public class LeaveManagement extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Status");
 
-        statusBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abcent", "Sick", "Vacation" }));
+        statusBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Absent", "Sick", "Vacation" }));
         statusBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusBox1ActionPerformed(evt);
@@ -172,7 +207,53 @@ public class LeaveManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
+
+        String email = emailField.getText().trim();
+        String status = (String) statusBox1.getSelectedItem();
+        String selectedShiftName = (String) shiftBox.getSelectedItem();
+
+        if (!email.isEmpty() && status != null && selectedShiftName != null) {
+            // ✅ Email format validation (simple regex)
+            if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid email address.", "Invalid Email", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                Integer shiftId = shiftMap.get(selectedShiftName);
+
+                if (shiftId == null) {
+                    JOptionPane.showMessageDialog(this, "Invalid shift selected.");
+                    return;
+                }
+
+                // 👉 Check if leave already marked today
+                ResultSet rs = DatabaseConnection.executeSearch(
+                        "SELECT * FROM attendance WHERE user_email = '" + email + "' AND date = CURDATE()"
+                );
+
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "You have already marked leave for today.", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // Insert leave record
+                DatabaseConnection.executeIUD(
+                        "INSERT INTO attendance (user_email, date, status, shift_id) "
+                        + "VALUES ('" + email + "', CURDATE(), '" + status + "', " + shiftId + ")"
+                );
+
+                JOptionPane.showMessageDialog(this, "Leave marked successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                reset();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please fill all fields before submitting.");
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

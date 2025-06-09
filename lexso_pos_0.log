@@ -3966,3 +3966,515 @@ Jun 09, 2025 11:57:47 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: OverviewPanel loaded successfully into jPanel11.
 Jun 09, 2025 11:57:51 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 12:05:44 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 12:05:44 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:05:46 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:05:46 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:05:51 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:05:53 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 12:05:55 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 12:05:58 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 12:06:30 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: cashier
+Jun 09, 2025 12:06:30 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: cashier (Email: cashier@lexso.com)
+Jun 09, 2025 12:06:30 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: cashier
+Jun 09, 2025 12:06:30 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:06:30 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:06:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:06:30 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 12:06:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:06:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 12:06:36 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 12:06:37 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:06:37 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:07:18 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: cashier
+Jun 09, 2025 12:07:19 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:07:19 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Cashier
+Jun 09, 2025 12:07:19 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Cashier: Access granted to Dashboard, POS Operations, Help.
+Jun 09, 2025 12:07:19 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:07:19 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:07:24 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:07:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations panel refreshed successfully.
+Jun 09, 2025 12:07:30 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:07:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:07:31 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:07:31 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:07:31 PM com.lexso.dashboard.main.DashboardWindow refreshLabelMouseClicked
+INFO: Dashboard UI refreshed successfully on refresh label click.
+Jun 09, 2025 12:07:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:07:35 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:07:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:26:24 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:26:25 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:26:25 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:26:55 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:26:55 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:26:56 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:00 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:00 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:04 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:05 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:05 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:10 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:11 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:11 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:26 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:29 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:30 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:34 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:37 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:37 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:47 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:27:53 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:27:53 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:27:56 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:28:03 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:28:03 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:28:10 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:28:11 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:28:13 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:28:13 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:28:17 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:28:19 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:28:19 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:28:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:28:35 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:28:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:28:38 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:29:01 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:29:01 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:29:07 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:29:09 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:29:09 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:46:30 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: cashier
+Jun 09, 2025 12:46:31 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:46:31 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Cashier
+Jun 09, 2025 12:46:31 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Cashier: Access granted to Dashboard, POS Operations, Help.
+Jun 09, 2025 12:46:32 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:46:32 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:47:58 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: cashier
+Jun 09, 2025 12:47:58 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:47:58 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Cashier
+Jun 09, 2025 12:47:59 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Cashier: Access granted to Dashboard, POS Operations, Help.
+Jun 09, 2025 12:47:59 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:47:59 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:48:02 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 12:48:25 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: cashier
+Jun 09, 2025 12:48:25 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:48:25 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Cashier
+Jun 09, 2025 12:48:25 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Cashier: Access granted to Dashboard, POS Operations, Help.
+Jun 09, 2025 12:48:26 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:48:26 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:48:31 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:48:49 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 12:49:01 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+Jun 09, 2025 12:49:01 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: heshant447@gmail.com)
+Jun 09, 2025 12:49:01 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: Admin
+Jun 09, 2025 12:49:01 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:49:01 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 12:49:01 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 12:49:02 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:49:02 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:49:02 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 12:49:04 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:52:48 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 12:52:48 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:52:49 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 12:52:49 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 12:52:50 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:52:50 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:52:53 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 12:53:18 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: cashier
+Jun 09, 2025 12:53:18 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: cashier (Email: cashier@lexso.com)
+Jun 09, 2025 12:53:18 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: cashier
+Jun 09, 2025 12:53:18 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:53:18 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Cashier
+Jun 09, 2025 12:53:18 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Cashier: Access granted to Dashboard, POS Operations, Help.
+Jun 09, 2025 12:53:18 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:53:18 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:53:18 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 12:53:20 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:53:30 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 12:53:38 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: Admin
+Jun 09, 2025 12:53:38 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: Admin (Email: heshant447@gmail.com)
+Jun 09, 2025 12:53:38 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: Admin
+Jun 09, 2025 12:53:38 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:53:38 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 12:53:38 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 12:53:38 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:53:38 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:53:38 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 12:53:40 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:53:53 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Administrator
+Jun 09, 2025 12:53:58 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 12:54:14 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: accountant
+Jun 09, 2025 12:54:14 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: accountant (Email: accountant@lexso.com)
+Jun 09, 2025 12:54:14 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: accountant
+Jun 09, 2025 12:54:14 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 12:54:14 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Accountant
+Jun 09, 2025 12:54:14 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Accountant: Access granted to Dashboard, Reports, Help.
+Jun 09, 2025 12:54:14 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 12:54:14 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 12:54:14 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 12:54:16 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Accountant
+Jun 09, 2025 12:54:24 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:19 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: accountant
+Jun 09, 2025 1:02:19 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 1:02:19 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Accountant
+Jun 09, 2025 1:02:19 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Accountant: Access granted to Dashboard, Reports, Help.
+Jun 09, 2025 1:02:20 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:02:20 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:23 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:24 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:33 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:02:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:37 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:02:47 PM com.lexso.login.main.Main <init>
+INFO: Starting LexSo POS application.
+Jun 09, 2025 1:03:05 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login button clicked. Attempting login for username: manager
+Jun 09, 2025 1:03:05 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Login successful for user: manager (Email: manager@lexso.com)
+Jun 09, 2025 1:03:05 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Remember Me checked. Preference saved for user: manager
+Jun 09, 2025 1:03:05 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 1:03:05 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Manager
+Jun 09, 2025 1:03:05 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Manager: Access granted to Dashboard, POS Operations, Products, Inventory, Suppliers, Customers, Reports, Help.
+Jun 09, 2025 1:03:05 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:03:05 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:03:05 PM com.lexso.login.main.Main jButton1ActionPerformed
+INFO: Redirected to Dashboard. Login window disposed.
+Jun 09, 2025 1:03:14 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:20:44 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: manager
+Jun 09, 2025 1:20:44 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 1:20:44 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Manager
+Jun 09, 2025 1:20:44 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Manager: Access granted to Dashboard, POS Operations, Products, Inventory, Suppliers, Customers, Reports, Help.
+Jun 09, 2025 1:20:45 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:20:45 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:20:48 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel refreshed successfully into jPanel11.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:22:30 PM com.lexso.dashboard.main.DashboardWindow refreshLabelMouseClicked
+INFO: Dashboard UI refreshed successfully on refresh label click.
+Jun 09, 2025 1:22:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:36:01 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: manager
+Jun 09, 2025 1:36:02 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 1:36:02 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Manager
+Jun 09, 2025 1:36:02 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Manager: Access granted to Dashboard, POS Operations, Products, Inventory, Suppliers, Customers, Reports, Help.
+Jun 09, 2025 1:36:03 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:36:03 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 1:36:05 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 1:36:07 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 1:36:07 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:33:31 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 2:33:31 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 2:33:32 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 2:33:32 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 2:33:33 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 2:33:33 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:33:42 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:33:44 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 2:33:44 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:34:03 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 2:34:05 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 2:34:08 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:34:22 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 2:34:22 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:34:34 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 2:34:35 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 2:34:36 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 2:34:37 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 2:36:17 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 2:36:18 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 2:36:18 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 2:36:18 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 2:36:19 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 2:36:19 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 2:36:51 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 3:16:38 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 3:16:39 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 3:16:39 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 3:16:39 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 3:16:41 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 3:16:41 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 3:16:46 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 3:16:48 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 3:16:50 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 3:16:52 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 3:16:53 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Customer loaded successfully into jPanel11.
+Jun 09, 2025 3:16:54 PM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+Jun 09, 2025 3:16:54 PM com.lexso.users.management.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+Jun 09, 2025 3:16:54 PM com.lexso.users.management.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+Jun 09, 2025 3:16:54 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+Jun 09, 2025 3:16:54 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Administrator
+Jun 09, 2025 3:16:55 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 3:16:57 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 3:16:58 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Administrator
+Jun 09, 2025 3:17:04 PM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+Jun 09, 2025 3:17:04 PM com.lexso.users.management.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+Jun 09, 2025 3:17:04 PM com.lexso.users.management.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+Jun 09, 2025 3:17:04 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+Jun 09, 2025 3:17:38 PM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 3:17:38 PM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 3:17:38 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Restricting dashboard access based on role: Administrator
+Jun 09, 2025 3:17:38 PM com.lexso.dashboard.main.DashboardWindow restrictAccessByRole
+INFO: Administrator: Full access granted to all panels.
+Jun 09, 2025 3:17:40 PM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 3:17:40 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 3:17:45 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 3:17:46 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 3:17:48 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Customer loaded successfully into jPanel11.
+Jun 09, 2025 3:17:51 PM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Administrator

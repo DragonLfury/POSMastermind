@@ -1,10 +1,12 @@
 package com.lexso.inventory.stock;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.lexso.connection.DatabaseConnection;
 import com.lexso.connection.ShaneConnection;
 import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -1703,6 +1705,8 @@ public class GRNWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        
+        JOptionPane.showMessageDialog(this, "GRN Created successfully!");
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);

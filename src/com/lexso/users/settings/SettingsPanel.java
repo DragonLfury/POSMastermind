@@ -98,6 +98,87 @@ public class SettingsPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
+        controlFeatureVisibility();
+
+    }
+
+    /**
+     * Controls visibility of UI components based on the logged-in user's role.
+     */
+    private void controlFeatureVisibility() {
+        try {
+            String role = CurrentUser.getRole();
+
+            
+            jPanel16.setVisible(true);
+            jPanel20.setVisible(true);
+
+            
+            adminProPanel.setVisible(false);
+            recieptjLabel.setVisible(false); // Receipt
+            locationjLabel.setVisible(false); // Bank Accounts
+            attendancejLabel.setVisible(false); // Attendance
+            leavejLabel.setVisible(false); // Leave Management
+            grnjLabel.setVisible(false); // GRN Management
+            giftjLabel.setVisible(false); // Gift Card Management
+            reciepttextjLabel.setVisible(false); // Receipt
+            locationtextjLabel.setVisible(false); // Bank Accounts
+            attendancetextjLabel.setVisible(false); // Attendance
+            leavetextjLabel.setVisible(false); // Leave Management
+            grntextjLabel.setVisible(false); // GRN Management
+            gifttextjLabel.setVisible(false); // Gift Card Management
+
+            // Role-based visibility for More Settings
+            switch (role) {
+                case "Administrator":
+                    adminProPanel.setVisible(true);
+                    recieptjLabel.setVisible(true); // Receipt
+                    locationjLabel.setVisible(true); // Bank Accounts
+                    attendancejLabel.setVisible(true); // Attendance
+                    leavejLabel.setVisible(true); // Leave Management
+                    grnjLabel.setVisible(true); // GRN Management
+                    giftjLabel.setVisible(true); // Gift Card Management
+                    reciepttextjLabel.setVisible(true); // Receipt
+                    locationtextjLabel.setVisible(true); // Bank Accounts
+                    attendancetextjLabel.setVisible(true); // Attendance
+                    leavetextjLabel.setVisible(true); // Leave Management
+                    grntextjLabel.setVisible(true); // GRN Management
+                    gifttextjLabel.setVisible(true); // Gift Card Management
+                    break;
+                case "Manager":
+                    adminProPanel.setVisible(true);
+                    recieptjLabel.setVisible(true); // Receipt
+                    attendancejLabel.setVisible(true); // Attendance
+                    leavejLabel.setVisible(true); // Leave Management
+                    giftjLabel.setVisible(true); // Gift Card Management
+                    reciepttextjLabel.setVisible(true); // Receipt
+                    attendancetextjLabel.setVisible(true); // Attendance
+                    leavetextjLabel.setVisible(true); // Leave Management
+                    gifttextjLabel.setVisible(true); // Gift Card Management
+                    break;
+                case "Cashier":
+                    // No access to More Settings; adminProPanel remains hidden
+                    break;
+                case "Inventory Supervisor":
+                    adminProPanel.setVisible(true);
+                    grnjLabel.setVisible(true); // GRN Management
+                    grntextjLabel.setVisible(true); // GRN Management
+                    break;
+                case "Accountant":
+                    adminProPanel.setVisible(true);
+                    recieptjLabel.setVisible(true); // Receipt
+                    locationjLabel.setVisible(true); // Bank Accounts
+                    reciepttextjLabel.setVisible(true); // Receipt
+                    locationtextjLabel.setVisible(true); // Bank Accounts
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Unknown role detected. Please contact support.", "Error", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error determining role permissions.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void loadCountry() {
@@ -241,22 +322,22 @@ public class SettingsPanel extends javax.swing.JPanel {
         jButton9.setIcon(removeImage);
 
         FlatSVGIcon reciptIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Recipt_Icon.svg", 25, 20);
-        jLabel65.setIcon(reciptIcon);
+        recieptjLabel.setIcon(reciptIcon);
 
         FlatSVGIcon bankIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Location_Icon.svg", 23, 20);
-        jLabel63.setIcon(bankIcon);
+        locationjLabel.setIcon(bankIcon);
 
         FlatSVGIcon giftsIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Gift_Icon.svg", 25, 20);
-        jLabel75.setIcon(giftsIcon);
+        giftjLabel.setIcon(giftsIcon);
 
         FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Atendance_Icon.svg", 25, 20);
-        jLabel68.setIcon(attendanceIcon);
+        attendancejLabel.setIcon(attendanceIcon);
 
         FlatSVGIcon supplierIocn = new FlatSVGIcon("com/lexso/users/icon/Setting_Supplier_Icon.svg", 25, 20);
-        jLabel73.setIcon(supplierIocn);
+        grnjLabel.setIcon(supplierIocn);
 
         FlatSVGIcon leaveIocn = new FlatSVGIcon("com/lexso/users/icon/leave.svg", 25, 20);
-        jLabel70.setIcon(leaveIocn);
+        leavejLabel.setIcon(leaveIocn);
     }
 
     private void loadDetails() {
@@ -332,7 +413,7 @@ public class SettingsPanel extends javax.swing.JPanel {
     }
 
     public void loadBankDetails() {
-        
+
         try {
             ResultSet bankresultSet = DatabaseConnection.executeSearch(
                     "SELECT * FROM `bank_details` "
@@ -349,7 +430,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     private void changePassword() {
@@ -615,20 +696,20 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel62 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         adminProPanel = new javax.swing.JPanel();
-        jLabel63 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
+        locationjLabel = new javax.swing.JLabel();
+        reciepttextjLabel = new javax.swing.JLabel();
+        recieptjLabel = new javax.swing.JLabel();
+        locationtextjLabel = new javax.swing.JLabel();
+        attendancetextjLabel = new javax.swing.JLabel();
+        attendancejLabel = new javax.swing.JLabel();
+        leavetextjLabel = new javax.swing.JLabel();
+        leavejLabel = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        jLabel75 = new javax.swing.JLabel();
-        jLabel76 = new javax.swing.JLabel();
+        grnjLabel = new javax.swing.JLabel();
+        grntextjLabel = new javax.swing.JLabel();
+        giftjLabel = new javax.swing.JLabel();
+        gifttextjLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -1333,52 +1414,52 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel63.setToolTipText("Bank Accounts");
-        jLabel63.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel63.addMouseListener(new java.awt.event.MouseAdapter() {
+        locationjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        locationjLabel.setToolTipText("Bank Accounts");
+        locationjLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        locationjLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel63MouseClicked(evt);
+                locationjLabelMouseClicked(evt);
             }
         });
 
-        jLabel64.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel64.setText("Reciept");
+        reciepttextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reciepttextjLabel.setText("Reciept");
 
-        jLabel65.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel65.setToolTipText("Bank Accounts");
-        jLabel65.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel65.addMouseListener(new java.awt.event.MouseAdapter() {
+        recieptjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        recieptjLabel.setToolTipText("Bank Accounts");
+        recieptjLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        recieptjLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel65MouseClicked(evt);
+                recieptjLabelMouseClicked(evt);
             }
         });
 
-        jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel66.setText("Location");
+        locationtextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        locationtextjLabel.setText("Location");
 
-        jLabel67.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jLabel67.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel67.setText("Attendance");
+        attendancetextjLabel.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        attendancetextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        attendancetextjLabel.setText("Attendance");
 
-        jLabel68.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel68.setToolTipText("Bank Accounts");
-        jLabel68.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel68.addMouseListener(new java.awt.event.MouseAdapter() {
+        attendancejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        attendancejLabel.setToolTipText("Bank Accounts");
+        attendancejLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        attendancejLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel68MouseClicked(evt);
+                attendancejLabelMouseClicked(evt);
             }
         });
 
-        jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel69.setText("Leaves");
+        leavetextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leavetextjLabel.setText("Leaves");
 
-        jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel70.setToolTipText("Bank Accounts");
-        jLabel70.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel70.addMouseListener(new java.awt.event.MouseAdapter() {
+        leavejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leavejLabel.setToolTipText("Bank Accounts");
+        leavejLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        leavejLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel70MouseClicked(evt);
+                leavejLabelMouseClicked(evt);
             }
         });
 
@@ -1390,65 +1471,65 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel72.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel72.setText("Settings");
 
-        jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel73.setToolTipText("Bank Accounts");
-        jLabel73.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel73.addMouseListener(new java.awt.event.MouseAdapter() {
+        grnjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        grnjLabel.setToolTipText("Bank Accounts");
+        grnjLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        grnjLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel73MouseClicked(evt);
+                grnjLabelMouseClicked(evt);
             }
         });
 
-        jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel74.setText("GRN Mng.");
+        grntextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        grntextjLabel.setText("GRN Mng.");
 
-        jLabel75.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel75.setToolTipText("Bank Accounts");
-        jLabel75.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel75.addMouseListener(new java.awt.event.MouseAdapter() {
+        giftjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        giftjLabel.setToolTipText("Bank Accounts");
+        giftjLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        giftjLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel75MouseClicked(evt);
+                giftjLabelMouseClicked(evt);
             }
         });
 
-        jLabel76.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel76.setText("Gifts");
+        gifttextjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        gifttextjLabel.setText("Gifts");
 
         javax.swing.GroupLayout adminProPanelLayout = new javax.swing.GroupLayout(adminProPanel);
         adminProPanel.setLayout(adminProPanelLayout);
         adminProPanelLayout.setHorizontalGroup(
             adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel66, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(reciepttextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(locationtextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(leavetextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel71, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(adminProPanelLayout.createSequentialGroup()
                 .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(attendancetextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminProPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(grntextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(adminProPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(attendancejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leavejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(locationjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(recieptjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminProPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(grnjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(adminProPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gifttextjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminProPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(giftjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)))
                 .addContainerGap())
         );
@@ -1460,29 +1541,29 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(recieptjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel64)
+                .addComponent(reciepttextjLabel)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(locationjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel66)
+                .addComponent(locationtextjLabel)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(attendancejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel67)
+                .addComponent(attendancetextjLabel)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(leavejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel69)
+                .addComponent(leavetextjLabel)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(grnjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel74)
+                .addComponent(grntextjLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(giftjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel76)
+                .addComponent(gifttextjLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1864,44 +1945,50 @@ public class SettingsPanel extends javax.swing.JPanel {
         addOrUpdateBankDetails();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jLabel63MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel63MouseClicked
+    private void locationjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationjLabelMouseClicked
         LocationMainDashboard locationMainDashboard = new LocationMainDashboard(new DashboardWindow(), true);
         locationMainDashboard.setVisible(true);
-    }//GEN-LAST:event_jLabel63MouseClicked
+    }//GEN-LAST:event_locationjLabelMouseClicked
 
-    private void jLabel65MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel65MouseClicked
+    private void recieptjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recieptjLabelMouseClicked
         EditableReciept editableReciept = new EditableReciept();
         editableReciept.setVisible(true);
-    }//GEN-LAST:event_jLabel65MouseClicked
+    }//GEN-LAST:event_recieptjLabelMouseClicked
 
-    private void jLabel68MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel68MouseClicked
+    private void attendancejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendancejLabelMouseClicked
         MarkAttendance markAttendance = new MarkAttendance();
         markAttendance.setVisible(true);
-    }//GEN-LAST:event_jLabel68MouseClicked
+    }//GEN-LAST:event_attendancejLabelMouseClicked
 
-    private void jLabel73MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel73MouseClicked
+    private void grnjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grnjLabelMouseClicked
         ManageGRN manageGRN = new ManageGRN();
         manageGRN.setVisible(true);
-    }//GEN-LAST:event_jLabel73MouseClicked
+    }//GEN-LAST:event_grnjLabelMouseClicked
 
-    private void jLabel70MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel70MouseClicked
+    private void leavejLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leavejLabelMouseClicked
         LeaveManagement leaveManagement = new LeaveManagement();
         leaveManagement.setVisible(true);
-    }//GEN-LAST:event_jLabel70MouseClicked
+    }//GEN-LAST:event_leavejLabelMouseClicked
 
-    private void jLabel75MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel75MouseClicked
+    private void giftjLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_giftjLabelMouseClicked
         GiftCardManagement giftCardManagement = new GiftCardManagement();
         giftCardManagement.setVisible(true);
-    }//GEN-LAST:event_jLabel75MouseClicked
+    }//GEN-LAST:event_giftjLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProPanel;
+    private javax.swing.JLabel attendancejLabel;
+    private javax.swing.JLabel attendancetextjLabel;
     private javax.swing.JComboBox<String> bankComboBox;
     private javax.swing.JComboBox<String> bankCountryComboBox;
     private javax.swing.JComboBox<String> cityComboBox1;
     private javax.swing.JComboBox<String> countryComboBox1;
     private javax.swing.JComboBox<String> districtComboBox1;
+    private javax.swing.JLabel giftjLabel;
+    private javax.swing.JLabel gifttextjLabel;
+    private javax.swing.JLabel grnjLabel;
+    private javax.swing.JLabel grntextjLabel;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1946,20 +2033,8 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -1983,7 +2058,13 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel leavejLabel;
+    private javax.swing.JLabel leavetextjLabel;
+    private javax.swing.JLabel locationjLabel;
+    private javax.swing.JLabel locationtextjLabel;
     private javax.swing.JComboBox<String> provinceComboBox1;
+    private javax.swing.JLabel recieptjLabel;
+    private javax.swing.JLabel reciepttextjLabel;
     private javax.swing.JPanel settingsPanel1;
     // End of variables declaration//GEN-END:variables
 }

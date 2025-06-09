@@ -37,27 +37,22 @@ public class BackupWindow extends javax.swing.JFrame {
             java.sql.ResultSet rs = null;
 
             try {
-                // First, close the connection in DatabaseConnection if it's open,
-                // to ensure a fresh connection is made for the restore sequence
-                // and later for reloading backup logs.
                 if (DatabaseConnection.connection != null && !DatabaseConnection.connection.isClosed()) {
                     DatabaseConnection.connection.close();
                 }
-                com.lexso.connection.DatabaseConnection.createConnection(); // Re-establish a clean connection
-                conn = com.lexso.connection.DatabaseConnection.connection; // Access the static connection directly
+                com.lexso.connection.DatabaseConnection.createConnection();
+                conn = com.lexso.connection.DatabaseConnection.connection;
 
                 stmt = conn.createStatement();
                 stmt.execute("SET FOREIGN_KEY_CHECKS=0;");
                 stmt.close();
 
-                // 2. Clear current database data by truncating tables, EXCLUDING 'backup_logs'
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery("SHOW TABLES;");
 
                 java.util.List<String> tableNamesToTruncate = new java.util.ArrayList<>();
                 while (rs.next()) {
                     String tableName = rs.getString(1);
-                    // EXCLUDE the backup_logs table from truncation
                     if (!tableName.equalsIgnoreCase("backup_logs")) {
                         tableNamesToTruncate.add(tableName);
                     }
@@ -71,7 +66,6 @@ public class BackupWindow extends javax.swing.JFrame {
                     stmt.close();
                 }
 
-                // 3. Restore from the selected backup file using mysql.exe
                 String restoreFile = "backup/" + fileName;
                 String mysqlExePath = "C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysql.exe";
                 String databaseName = "u821149722_lexso";
@@ -101,16 +95,13 @@ public class BackupWindow extends javax.swing.JFrame {
                 if (processComplete == 0) {
                     JOptionPane.showMessageDialog(null, "Database restored successfully from:\n" + fileName + " 🎉");
 
-                    // IMPORTANT: Re-establish connection *before* reloading backup logs
-                    // This ensures loadBackupLogsToTableByDate gets a fresh connection
-                    // and accurately reads the *current* state of the backup_logs table.
                     if (DatabaseConnection.connection != null && !DatabaseConnection.connection.isClosed()) {
                         DatabaseConnection.connection.close();
                     }
-                    DatabaseConnection.createConnection(); // Force a fresh connection for loadBackupLogsToTableByDate
+                    DatabaseConnection.createConnection(); 
 
-                    loadBackupLogsToTableByDate(null); // Now this should correctly load the *actual* current logs
-                    reset(); // This also calls loadBackupLogsToTableByDate(null), but the above ensures connection is fresh
+                    loadBackupLogsToTableByDate(null);
+                    reset(); 
                 } else {
                     JOptionPane.showMessageDialog(null, "Restore failed. ❌\nError details:\n" + output.toString(), "Restore Error", JOptionPane.ERROR_MESSAGE);
                 }

@@ -63,6 +63,7 @@ public class DashboardWindow extends javax.swing.JFrame {
     public DashboardWindow() {
         LOGGER.info("Initializing DashboardWindow.");
         initComponents();
+        restrictAccessByRole();
         defaultColor = jPanel1.getBackground();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadSVGIcons();
@@ -72,6 +73,72 @@ public class DashboardWindow extends javax.swing.JFrame {
         jPanel2.setBackground(selectedColor);
         currentlySelectedPanel = jPanel2;
         loadPanel(new Overview(), "OverviewPanel loaded successfully into jPanel11.");
+    }
+
+    private void restrictAccessByRole() {
+        LOGGER.info("Restricting dashboard access based on role: " + loggedInRole);
+
+        // Default: Hide all panels except Dashboard, Help, and Logout
+        jPanel3.setVisible(false); // POS Operations
+        jPanel14.setVisible(false); // Products
+        jPanel4.setVisible(false); // Inventory
+        jPanel5.setVisible(false); // Suppliers
+        jPanel6.setVisible(false); // Customers
+        jPanel7.setVisible(false); // Employees
+        jPanel8.setVisible(false); // Reports
+        jPanel9.setVisible(false); // Settings
+        jPanel2.setVisible(true); // Dashboard (always visible)
+        jPanel10.setVisible(true); // Help (always visible)
+        jPanel13.setVisible(true); // Logout (always visible)
+
+        switch (loggedInRole) {
+            case "Administrator":
+                // Full access to all panels
+                jPanel3.setVisible(true);
+                jPanel14.setVisible(true);
+                jPanel4.setVisible(true);
+                jPanel5.setVisible(true);
+                jPanel6.setVisible(true);
+                jPanel7.setVisible(true);
+                jPanel8.setVisible(true);
+                jPanel9.setVisible(true);
+                LOGGER.info("Administrator: Full access granted to all panels.");
+                break;
+            case "Manager":
+                // Access to Dashboard, POS Operations, Products, Inventory, Suppliers, Customers, Reports, Help
+                jPanel3.setVisible(true);
+                jPanel14.setVisible(true);
+                jPanel4.setVisible(true);
+                jPanel5.setVisible(true);
+                jPanel6.setVisible(true);
+                jPanel8.setVisible(true);
+                jPanel9.setVisible(true);
+                LOGGER.info("Manager: Access granted to Dashboard, POS Operations, Products, Inventory, Suppliers, Customers, Reports, Help.");
+                break;
+            case "Cashier":
+                // Access to Dashboard, POS Operations, Help
+                jPanel3.setVisible(true);
+                jPanel9.setVisible(true);
+                LOGGER.info("Cashier: Access granted to Dashboard, POS Operations, Help.");
+                break;
+            case "Inventory Supervisor":
+                // Access to Dashboard, Products, Inventory, Suppliers, Help
+                jPanel14.setVisible(true);
+                jPanel4.setVisible(true);
+                jPanel5.setVisible(true);
+                jPanel9.setVisible(true);
+                LOGGER.info("Inventory Supervisor: Access granted to Dashboard, Products, Inventory, Suppliers, Help.");
+                break;
+            case "Accountant":
+                // Access to Dashboard, Reports, Help
+                jPanel8.setVisible(true);
+                jPanel9.setVisible(true);
+                LOGGER.info("Accountant: Access granted to Dashboard, Reports, Help.");
+                break;
+            default:
+                LOGGER.warning("Unknown role: " + loggedInRole + ". Defaulting to minimal access.");
+                break;
+        }
     }
 
     public void loadPanel(JPanel panelToLoad, String logMessage) {

@@ -55,8 +55,7 @@ public class ReorderStock extends javax.swing.JFrame {
     public String query3;
     public String query4;
     public String query5;
-    
-    
+
     private String loggedInUsername = CurrentUser.getUsername();
 
     public boolean isValidint(String number) {
@@ -1008,7 +1007,7 @@ public class ReorderStock extends javax.swing.JFrame {
                     String supplierEmail = resultSet.getString("sup.email");
                     String stockId = resultSet.getString("s.id");
                     String filePath = resultSet.getString("product_image");
-                    
+
                     String emailBody = "Dear Supplier Team,\n\n"
                             + "Hope you're having a productive week.\n\n"
                             + "This email is a reorder request for the following product to ensure we maintain optimal stock levels at LexSo:\n\n"
@@ -1023,7 +1022,7 @@ public class ReorderStock extends javax.swing.JFrame {
                             + "0726733332\n"
                             + "contact@lexso.com\n"
                             + "www.lexfury.com";
-                    
+
                     String correctedFilePath = filePath.replace("product-image///", "");
                     boolean emailSent = false;
                     boolean messageSent = false;
@@ -1043,13 +1042,13 @@ public class ReorderStock extends javax.swing.JFrame {
                         String response = fileUploadService.uploadFile(fullFilePath);
                         System.out.println(response);
 
-                        String whatsAppMessage = "_*🔔 Reorder Alert!*_\n\n" +
-                         "*Product:* `" + productName + "`\n" +
-                         "*Quantity Needed:* `" + qty + " units`\n\n" +
-                         "Hey Supplier Team,\n" + // Or dynamically insert supplier name
-                         "We need to restock _" + productName + "_! Kindly process a reorder for `" + qty + "` units.\n\n" +
-                         "Your prompt action is appreciated! 🙏";
-                        
+                        String whatsAppMessage = "_*🔔 Reorder Alert!*_\n\n"
+                                + "*Product:* `" + productName + "`\n"
+                                + "*Quantity Needed:* `" + qty + " units`\n\n"
+                                + "Hey Supplier Team,\n"+
+                                "We need to restock _" + productName + "_! Kindly process a reorder for `" + qty + "` units.\n\n"
+                                + "Your prompt action is appreciated! 🙏";
+
                         whatsAppService.sendMediaMessage(
                                 "94726733332",
                                 whatsAppMessage,
@@ -1210,15 +1209,36 @@ public class ReorderStock extends javax.swing.JFrame {
                         String correctedFilePath = filePath.replace("product-image//", "");
                         System.out.println(correctedFilePath);
 
-                        String body = "Cancel order for " + productName + "/n on " + reorderDate + "/n with a qty of " + qty;
+                        String emailBody = "Dear Supplier Team,\n\n"
+                                + "Hope you're having a productive week.\n\n"
+                                + "This email is a reorder request for the following product to ensure we maintain optimal stock levels at LexSo:\n\n"
+                                + "* Product Name: " + productName + "\n"
+                                + "* Required Quantity: " + qty + " units\n\n"
+                                + "We kindly request you to process this order as soon as possible to avoid any disruptions in our supply chain. We appreciate your prompt attention to this matter.\n\n"
+                                + "Please confirm receipt of this order and provide an estimated delivery date at your earliest convenience. If there are any concerns regarding this request or stock availability, please don't hesitate to reach out.\n\n"
+                                + "Thank you for your continued partnership and excellent service.\n\n"
+                                + "Sincerely,\n\n"
+                                + "The LexSo Team\n"
+                                + "" + loggedInUsername + "\n"
+                                + "0726733332\n"
+                                + "contact@lexso.com\n"
+                                + "www.lexfury.com";
+
+                        String whatsAppMessage = "*🚫 Order Canceled!*" + "\n"
+                                + "> *Product:* `" + productName + "`\n"
+                                + "> *Qty:* `" + qty + "`\n"
+                                + "> *Order ID:* `" + orderId + "`\n\n"
+                                + "Hey Supplier Team,\n"
+                                + "We've canceled the reorder for _" + productName + "_ (" + qty + " units).\n"
+                                + "Kindly stop processing it. 🙏";
 
                         try {
                             WhatsAppService whatsAppService = new WhatsAppService();
                             whatsAppService.sendMediaMessage(
-                                    "94776299240",
-                                    "Generic image message",
+                                    "94726733332",
+                                    whatsAppMessage,
                                     WhatsAppService.MediaType.IMAGE,
-                                    "https://t4.ftcdn.net/jpg/00/53/45/31/360_F_53453175_hVgYVz0WmvOXPd9CNzaUcwcibiGao3CL.jpg"
+                                    "https://5.imimg.com/data5/GM/JV/QQ/SELLER-15662366/magento-2-cancel-order.png"
                             );
 
 //                            whatsAppService.sendMessage(supplierMobile, correctedFilePath, "Cancel order for " + productName + "/n on " + reorderDate + "/n with a qty of " + qty);
@@ -1229,7 +1249,7 @@ public class ReorderStock extends javax.swing.JFrame {
                         }
 
                         try {
-                            sendCancelEmail(supplierEmail, "Cancel Order", body, productName, qty, reorderDate);
+                            sendCancelEmail(supplierEmail, "Cancel Order", emailBody, productName, qty, reorderDate);
 
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(this, "Failed to send email: " + e.getMessage());
