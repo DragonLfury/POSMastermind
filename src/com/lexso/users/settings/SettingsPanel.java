@@ -7,6 +7,7 @@ package com.lexso.users.settings;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.connection.DatabaseConnection;
 import com.lexso.dashboard.main.DashboardWindow;
+import com.lexso.inventory.stock.ManageGRN;
 import com.lexso.settings.EditableReciept;
 import com.lexso.settings.GiftCardManagement;
 import com.lexso.settings.MarkAttendance;
@@ -1362,11 +1363,16 @@ public class SettingsPanel extends javax.swing.JPanel {
         });
 
         jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel69.setText("Supplier");
+        jLabel69.setText("GRN Mng.");
 
         jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel70.setToolTipText("Bank Accounts");
         jLabel70.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel70.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel70MouseClicked(evt);
+            }
+        });
 
         jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel71.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1845,6 +1851,11 @@ public class SettingsPanel extends javax.swing.JPanel {
         GiftCardManagement giftCardManagement = new GiftCardManagement();
         giftCardManagement.setVisible(true);
     }//GEN-LAST:event_jLabel73MouseClicked
+
+    private void jLabel70MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel70MouseClicked
+        ManageGRN manageGRN = new ManageGRN();
+        manageGRN.setVisible(true);
+    }//GEN-LAST:event_jLabel70MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

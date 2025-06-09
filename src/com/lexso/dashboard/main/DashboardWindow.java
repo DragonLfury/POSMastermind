@@ -25,6 +25,7 @@ import com.lexso.users.management.EmployeePanel;
 import com.lexso.login.main.Main;
 import static com.lexso.login.main.Main.LOGGER;
 import com.lexso.reports.panel.ReportsPanel;
+import com.lexso.sales.panel.POSOperations;
 import com.lexso.settings.SupplierManagement;
 import com.lexso.users.settings.SettingsPanel;
 import com.lexso.util.CurrentUser;
@@ -1114,7 +1115,7 @@ public class DashboardWindow extends javax.swing.JFrame {
         }
         jPanel3.setBackground(selectedColor);
         currentlySelectedPanel = jPanel3;
-
+        loadPanel(new POSOperations(), "POS Operations loaded successfully into jPanel11.");
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked

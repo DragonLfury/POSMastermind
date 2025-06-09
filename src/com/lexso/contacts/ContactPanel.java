@@ -58,7 +58,7 @@ public class ContactPanel extends javax.swing.JPanel {
         // SMTP server configuration
         String fromEmail = "geekhirusha@gmail.com";
         String password = "sltqhvxghjmpztlt";
-        String toEmail = "geekhirusha@gmail.com";
+        String toEmail = "dinushikaprasangani70@gmail.com";
         String customerName = jTextField1.getText();
         String customerEmail = jTextField2.getText();
         String subject = jTextField3.getText();

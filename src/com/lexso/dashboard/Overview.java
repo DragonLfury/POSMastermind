@@ -11,6 +11,7 @@ import com.lexso.contacts.ContactPanel;
 import com.lexso.customers.Customer;
 import com.lexso.dashboard.main.DashboardWindow;
 import com.lexso.inventory.product.AddProduct;
+import com.lexso.inventory.stock.GRNWindow;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;
@@ -1245,8 +1246,8 @@ public class Overview extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel11MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
-        DashboardWindow dashboardWindow = new DashboardWindow();
-        dashboardWindow.loadPanel(new ContactPanel(), "OverviewPanel loaded successfully into jPanel11.");
+        GRNWindow grnWindow = new GRNWindow();
+        grnWindow.setVisible(true);
     }//GEN-LAST:event_jPanel14MouseClicked
 
     private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
