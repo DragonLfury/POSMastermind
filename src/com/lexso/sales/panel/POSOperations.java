@@ -4,6 +4,7 @@
  */
 package com.lexso.sales.panel;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.lexso.sales.Main;
 import com.lexso.sales.SalesAnalysis;
 
@@ -18,6 +19,15 @@ public class POSOperations extends javax.swing.JPanel {
      */
     public POSOperations() {
         initComponents();
+        loadSVG();
+    }
+
+    private void loadSVG() {
+        FlatSVGIcon posIcon = new FlatSVGIcon("com/lexso/sales/icon/pos.svg", 70, 70);
+        jLabel5.setIcon(posIcon);
+        
+        FlatSVGIcon invoicesIcon = new FlatSVGIcon("com/lexso/sales/icon/invoiceSearch.svg", 70, 70);
+        jLabel6.setIcon(invoicesIcon);
     }
 
     /**
@@ -71,17 +81,17 @@ public class POSOperations extends javax.swing.JPanel {
             posjpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(posjpanelLayout.createSequentialGroup()
-                .addGap(145, 145, 145)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, posjpanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(141, 141, 141))
         );
         posjpanelLayout.setVerticalGroup(
             posjpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(posjpanelLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -118,16 +128,16 @@ public class POSOperations extends javax.swing.JPanel {
             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invlistjpanelLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(140, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
+                .addGap(132, 132, 132))
         );
         invlistjpanelLayout.setVerticalGroup(
             invlistjpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invlistjpanelLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)

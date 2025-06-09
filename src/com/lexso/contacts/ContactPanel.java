@@ -55,23 +55,29 @@ public class ContactPanel extends javax.swing.JPanel {
     }
 
     private void sendEmail() {
-        // SMTP server configuration
-        String fromEmail = "geekhirusha@gmail.com";
-        String password = "sltqhvxghjmpztlt";
-        String toEmail = "dinushikaprasangani70@gmail.com";
         String customerName = jTextField1.getText();
         String customerEmail = jTextField2.getText();
         String subject = jTextField3.getText();
         String message = jTextArea1.getText();
 
-        // SMTP Properties configuration
+        // === Validate email before sending ===
+        if (customerEmail == null || customerEmail.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Email address is empty. Cannot send email.");
+            return;
+        }
+
+        // Continue with sending if validation passes
+        String fromEmail = "geekhirusha@gmail.com";
+        String password = "sltqhvxghjmpztlt";
+        String toEmail = "dinushikaprasangani70@gmail.com";
+
+        // SMTP config
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
 
-        // Session 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -80,13 +86,11 @@ public class ContactPanel extends javax.swing.JPanel {
         });
 
         try {
-            // Email message 
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(fromEmail));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             msg.setSubject(subject);
 
-            // HTML email body
             String htmlMessage = "<html>"
                     + "<body>"
                     + "<h2>New Contact Form Submission</h2>"
@@ -100,14 +104,10 @@ public class ContactPanel extends javax.swing.JPanel {
                     + "</html>";
 
             msg.setContent(htmlMessage, "text/html");
-
-            // Email send  
             Transport.send(msg);
+
             JOptionPane.showMessageDialog(null, "Email sent successfully!");
-
-            // Send data to WhatsApp API
             sendToWhatsAppAPI(customerName, customerEmail, subject, message);
-
             reset();
         } catch (MessagingException e) {
             JOptionPane.showMessageDialog(null, "Failed to send email: " + e.getMessage());

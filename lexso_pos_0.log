@@ -3802,3 +3802,167 @@ Jun 09, 2025 10:22:55 AM com.lexso.dashboard.Overview <init>
 INFO: Overview panel initialized and charts/data loaded.
 Jun 09, 2025 10:22:55 AM com.lexso.dashboard.main.DashboardWindow loadPanel
 INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:50:50 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 10:50:50 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 10:50:51 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 10:50:51 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:50:56 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 10:50:58 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 10:51:00 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 10:51:08 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:51:12 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:51:14 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Administrator
+Jun 09, 2025 10:51:15 AM com.lexso.dashboard.main.DashboardWindow jPanel7MouseClicked
+INFO: jPanel7 (Employees) clicked. Attempting to load EmployeePanel into jPanel11.
+Jun 09, 2025 10:51:15 AM com.lexso.users.management.EmployeePanel <init>
+INFO: Initializing EmployeePanel.
+Jun 09, 2025 10:51:15 AM com.lexso.users.management.EmployeePanel <init>
+INFO: EmployeePanel initialized successfully.
+Jun 09, 2025 10:51:15 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: EmployeePanel loaded successfully into jPanel11.
+Jun 09, 2025 10:51:16 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Customer loaded successfully into jPanel11.
+Jun 09, 2025 10:51:18 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 10:52:59 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 10:52:59 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 10:53:00 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 10:53:00 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:53:06 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 10:54:11 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 10:54:11 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 10:54:13 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 10:54:13 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:54:18 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 10:54:30 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 10:54:31 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 10:54:32 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 10:54:32 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 10:54:33 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:04:00 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:04:00 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:04:01 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:04:01 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:04:18 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:05:02 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:05:02 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:05:03 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:05:03 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:05:10 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:08:06 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:08:06 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:08:07 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:08:07 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:08:12 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:08:56 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:08:56 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:08:57 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:08:57 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:09:01 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:09:24 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:09:24 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:09:30 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:09:33 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:09:36 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:09:38 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel refreshed successfully into jPanel11.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:10:05 AM com.lexso.dashboard.main.DashboardWindow refreshLabelMouseClicked
+INFO: Dashboard UI refreshed successfully on refresh label click.
+Jun 09, 2025 11:10:08 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:10:09 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: ContactUsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:10:10 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:38:23 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:38:23 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:38:25 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:38:25 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:38:29 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: SettingsPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:38:45 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:38:45 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:38:46 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: POS Operations loaded successfully into jPanel11.
+Jun 09, 2025 11:38:47 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 11:38:50 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.
+Jun 09, 2025 11:38:57 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Supplier List loaded successfully into jPanel11.
+Jun 09, 2025 11:57:45 AM com.lexso.login.main.Main$7 run
+INFO: Auto-login successful for remembered user: Admin
+Jun 09, 2025 11:57:45 AM com.lexso.dashboard.main.DashboardWindow <init>
+INFO: Initializing DashboardWindow.
+Jun 09, 2025 11:57:47 AM com.lexso.dashboard.Overview <init>
+INFO: Overview panel initialized and charts/data loaded.
+Jun 09, 2025 11:57:47 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: OverviewPanel loaded successfully into jPanel11.
+Jun 09, 2025 11:57:51 AM com.lexso.dashboard.main.DashboardWindow loadPanel
+INFO: Product and category loaded successfully into jPanel11.

@@ -10,6 +10,7 @@ import com.lexso.dashboard.main.DashboardWindow;
 import com.lexso.inventory.stock.ManageGRN;
 import com.lexso.settings.EditableReciept;
 import com.lexso.settings.GiftCardManagement;
+import com.lexso.settings.LeaveManagement;
 import com.lexso.settings.MarkAttendance;
 import com.lexso.settings.location.main.LocationMainDashboard;
 import com.lexso.users.bankaccounts.AllBankAccountsWindow;
@@ -238,7 +239,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         FlatSVGIcon removeImage = new FlatSVGIcon("com/lexso/users/icon/remove.svg", 20, 20);
         jButton5.setIcon(removeImage);
         jButton9.setIcon(removeImage);
-        
+
         FlatSVGIcon reciptIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Recipt_Icon.svg", 25, 20);
         jLabel65.setIcon(reciptIcon);
 
@@ -246,13 +247,16 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel63.setIcon(bankIcon);
 
         FlatSVGIcon giftsIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Gift_Icon.svg", 25, 20);
-        jLabel73.setIcon(giftsIcon);
+        jLabel75.setIcon(giftsIcon);
 
         FlatSVGIcon attendanceIcon = new FlatSVGIcon("com/lexso/users/icon/Setting_Atendance_Icon.svg", 25, 20);
         jLabel68.setIcon(attendanceIcon);
 
         FlatSVGIcon supplierIocn = new FlatSVGIcon("com/lexso/users/icon/Setting_Supplier_Icon.svg", 25, 20);
-        jLabel70.setIcon(supplierIocn);
+        jLabel73.setIcon(supplierIocn);
+
+        FlatSVGIcon leaveIocn = new FlatSVGIcon("com/lexso/users/icon/leave.svg", 25, 20);
+        jLabel70.setIcon(leaveIocn);
     }
 
     private void loadDetails() {
@@ -328,6 +332,7 @@ public class SettingsPanel extends javax.swing.JPanel {
     }
 
     public void loadBankDetails() {
+        
         try {
             ResultSet bankresultSet = DatabaseConnection.executeSearch(
                     "SELECT * FROM `bank_details` "
@@ -344,6 +349,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     private void changePassword() {
@@ -621,6 +627,8 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel72 = new javax.swing.JLabel();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -1363,7 +1371,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         });
 
         jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel69.setText("GRN Mng.");
+        jLabel69.setText("Leaves");
 
         jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel70.setToolTipText("Bank Accounts");
@@ -1376,7 +1384,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel71.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel71.setText("Admin");
+        jLabel71.setText("More");
 
         jLabel72.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel72.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1392,7 +1400,19 @@ public class SettingsPanel extends javax.swing.JPanel {
         });
 
         jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel74.setText("Gifts");
+        jLabel74.setText("GRN Mng.");
+
+        jLabel75.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel75.setToolTipText("Bank Accounts");
+        jLabel75.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel75.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel75MouseClicked(evt);
+            }
+        });
+
+        jLabel76.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel76.setText("Gifts");
 
         javax.swing.GroupLayout adminProPanelLayout = new javax.swing.GroupLayout(adminProPanel);
         adminProPanel.setLayout(adminProPanelLayout);
@@ -1411,18 +1431,26 @@ public class SettingsPanel extends javax.swing.JPanel {
                         .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(adminProPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(adminProPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(adminProPanelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminProPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(adminProPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, adminProPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)))
+                .addContainerGap())
         );
         adminProPanelLayout.setVerticalGroup(
             adminProPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1451,7 +1479,11 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel73, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel74)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel76)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout settingsPanel1Layout = new javax.swing.GroupLayout(settingsPanel1);
@@ -1480,9 +1512,9 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel21)
                 .addGap(15, 15, 15)
                 .addGroup(settingsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adminProPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminProPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -1848,14 +1880,19 @@ public class SettingsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel68MouseClicked
 
     private void jLabel73MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel73MouseClicked
-        GiftCardManagement giftCardManagement = new GiftCardManagement();
-        giftCardManagement.setVisible(true);
+        ManageGRN manageGRN = new ManageGRN();
+        manageGRN.setVisible(true);
     }//GEN-LAST:event_jLabel73MouseClicked
 
     private void jLabel70MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel70MouseClicked
-        ManageGRN manageGRN = new ManageGRN();
-        manageGRN.setVisible(true);
+        LeaveManagement leaveManagement = new LeaveManagement();
+        leaveManagement.setVisible(true);
     }//GEN-LAST:event_jLabel70MouseClicked
+
+    private void jLabel75MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel75MouseClicked
+        GiftCardManagement giftCardManagement = new GiftCardManagement();
+        giftCardManagement.setVisible(true);
+    }//GEN-LAST:event_jLabel75MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1921,6 +1958,8 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
